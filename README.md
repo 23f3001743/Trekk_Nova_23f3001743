@@ -27,7 +27,7 @@ TrekkNova lets users browse and book trekking packages across different regions 
 
 - [done] Milestone 0 — GitHub Setup
 - [done ] Database Models and Schema
-- [ ] Authentication and Role-Based Access
+- [done ] Authentication and Role-Based Access
 - [ ] Admin Dashboard
 - [ ] Trek Guide Dashboard
 - [ ] Trekker Dashboard and Booking System
