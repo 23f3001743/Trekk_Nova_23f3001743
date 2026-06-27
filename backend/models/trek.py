@@ -30,8 +30,8 @@ class Trek(db.Model):
     # which staff is handling this trek
 
     guide_id = db.Column(
-        db.integer,
-        db.Foreignkey('app_users.id'),
+        db.Integer,
+        db.ForeignKey('app_users.id'),
         nullable=True
     )
 

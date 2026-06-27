@@ -7,7 +7,7 @@ from extensions import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.model):
+class User(db.Model):
     __tablename__ = 'app_users'
 
     id  = db.Column(db.Integer, primary_key=True)
@@ -28,16 +28,24 @@ class User(db.model):
     about_me = db.Column(db.Text, nullable= True)
 
 
-    joined_on = db.column(db.DateTime, default = datetime.utcnow)
+    joined_on = db.Column(db.DateTime, default = datetime.utcnow)
 
 
     #trekker can book more than one booking
 
-    my_bookings = db.relatioship(
-        'Booking' , 
-        backref = 'guide_info' , 
-        lazy = True,
-        foreign_keys = 'Trek.guide_id'
+    my_bookings = db.relationship(
+        'Booking',
+        backref='trekker_info',
+        lazy=True,
+        foreign_keys='Booking.trekker_id'
+    )
+
+    # one guide(staff) -> many treks handled
+    handled_treks = db.relationship(
+        'Trek',
+        backref='guide_info',
+        lazy=True,
+        foreign_keys='Trek.guide_id'
     )
 
 
