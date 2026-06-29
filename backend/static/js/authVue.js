@@ -9,7 +9,7 @@ const LoginPage = {
                 <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200&q=70" alt="mountain"/>
                 <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=70" alt="peak"/>
                 <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&q=70" alt="trek"/>
-                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&q=70" alt="hike"/>
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&q=70" alt="lake"/>
             </div>
 
             <!-- brand -->

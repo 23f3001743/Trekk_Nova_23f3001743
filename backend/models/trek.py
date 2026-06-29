@@ -27,6 +27,7 @@ class Trek(db.Model):
 
     current_status = db.Column(db.String(20), nullable=False, default='Open')
 
+    image_key = db.Column(db.String(50), nullable=True)
     # which staff is handling this trek
 
     guide_id = db.Column(
@@ -59,6 +60,7 @@ class Trek(db.Model):
             'current_status'  : self.current_status,
             'guide_id'        : self.guide_id,
             'guide_name'      : self.guide_info.full_name if self.guide_info else None,
-            'listed_on'       : self.listed_on.strftime('%Y-%m-%d')
-            
+            'listed_on'       : self.listed_on.strftime('%Y-%m-%d'),
+            'image_key'       : self.image_key,
+
         }

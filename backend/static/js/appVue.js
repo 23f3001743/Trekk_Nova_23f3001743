@@ -63,7 +63,7 @@ const TrekkNova = {
         const activeUser = ref(null)
         const loggedIn   = computed(() => !!activeUser.value)
 
-        // check if already logged in on page load
+        
         onMounted(() => {
             const token = localStorage.getItem('token')
             const saved = localStorage.getItem('user')
@@ -91,7 +91,7 @@ const TrekkNova = {
     }
 }
 
-// mount app when page is ready
+
 document.addEventListener('DOMContentLoaded', () => {
     const app = createApp(TrekkNova)
     app.component('login-page',    LoginPage)
