@@ -475,7 +475,7 @@ const AdminPanel = {
                 </div>
 
                 <!-- ── GUIDES PAGE ── -->
-                
+
                 <div v-if="page==='guides'">
                     <div class="d-flex justify-content-between
                         align-items-center mb-4">
@@ -789,7 +789,7 @@ const AdminPanel = {
         'triund'    : 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=70',
         'valley'    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70',
 
-        // nature themes (add your own!)
+        
         'snow'      : 'https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&q=70',
         'forest'    : 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=70',
         'river'     : 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70',
@@ -808,25 +808,25 @@ const AdminPanel = {
         'uttarakhand':'https://images.unsplash.com/photo-1623838978580-ef52ec53b4b1?w=400&q=70',
     }
 
-    // STEP 1 → check image_key first (admin gave specific keyword)
+    
     if (imageKey && imageKey.trim() !== '') {
         const k = imageKey.toLowerCase().trim()
         if (myImageMap[k]) return myImageMap[k]
     }
 
-    // STEP 2 → check title words
+    
     const t = title.toLowerCase()
     for (const key in myImageMap) {
         if (t.includes(key)) return myImageMap[key]
     }
 
-    // STEP 3 → check region words
+    
     const r = region.toLowerCase()
     for (const key in myImageMap) {
         if (r.includes(key)) return myImageMap[key]
     }
 
-    // STEP 4 → nothing matched, show default
+    //  default
     return 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70'
 }
         
