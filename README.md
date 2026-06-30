@@ -29,7 +29,7 @@ TrekkNova lets users browse and book trekking packages across different regions 
 - [done ] Database Models and Schema
 - [done ] Authentication and Role-Based Access
 - [done ] Admin Dashboard
-- [ ] Trek Guide Dashboard
+- [done] Trek Guide Dashboard
 - [ ] Trekker Dashboard and Booking System
 - [ ] Booking History and Status Tracking
 - [ ] Celery Background Jobs
