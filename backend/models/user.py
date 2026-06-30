@@ -41,6 +41,7 @@ class User(db.Model):
     )
 
     # one guide(staff) -> many treks handled
+    
     handled_treks = db.relationship(
         'Trek',
         backref='guide_info',

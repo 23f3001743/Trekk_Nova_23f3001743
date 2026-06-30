@@ -15,15 +15,15 @@ class Booking(db.Model):
 
     booked_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Booked / Cancelled / Completed
+    
     booking_status = db.Column(db.String(20), nullable=False, default='Booked')
 
-    # payment simulation fields
-    payment_status = db.Column(db.String(20), default='Pending')   # Pending / Paid
+    
+    payment_status = db.Column(db.String(20), default='Pending')   
     payment_ref    = db.Column(db.String(100), nullable=True)
     amount_paid    = db.Column(db.Float, default=0.0)
 
-    # prevents double booking
+    
     __table_args__ = (
         db.UniqueConstraint('trekker_id', 'trek_id', name='one_booking_per_trek'),
         {'extend_existing': True}

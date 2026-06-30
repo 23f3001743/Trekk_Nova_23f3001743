@@ -7,6 +7,7 @@ const AdminPanel = {
         <div class="row">
 
             <!-- SIDEBAR -->
+
             <div class="col-md-2 side-nav d-none d-md-block">
                 <div class="px-3 py-3">
                     <small class="text-muted text-uppercase fw-bold"
@@ -37,6 +38,7 @@ const AdminPanel = {
             </div>
 
             <!-- MAIN CONTENT -->
+
             <div class="col-md-10 p-4">
 
                 <!-- notice alert -->
@@ -45,10 +47,10 @@ const AdminPanel = {
                     {{ notice }}
                 </div>
 
-                <!-- ── HOME / DASHBOARD ── -->
+                <!-- ──  DASHBOARD ── -->
                 <div v-if="page==='home'">
 
-                    <!-- welcome banner -->
+                    <!-- Welcome Greet -->
                     <div class="nova-card mb-4 overflow-hidden"
                         style="position:relative; height:140px">
                         <img
@@ -70,7 +72,8 @@ const AdminPanel = {
                         </div>
                     </div>
 
-                    <!-- stat cards (like your image reference) -->
+                    <!-- STATS CARD BOXES  -->
+
                     <div class="row g-3 mb-4" v-if="dashStats">
                         <div class="col-6 col-md-3">
                             <div class="nova-card p-3">
@@ -177,7 +180,8 @@ const AdminPanel = {
                         </div>
                     </div>
 
-                    <!-- recent activity section -->
+                    <!-- RECENTLY ACTION -->
+
                     <div class="nova-card p-3">
                         <h6 class="fw-bold mb-3">
                             <i class="bi bi-activity me-2"
@@ -215,6 +219,7 @@ const AdminPanel = {
                 </div>
 
                 <!-- ── TREKS PAGE ── -->
+
                 <div v-if="page==='treks'">
                     <div class="d-flex justify-content-between
                         align-items-center mb-4">
@@ -228,7 +233,8 @@ const AdminPanel = {
                         </button>
                     </div>
 
-                    <!-- trek form -->
+                    <!-- TREK FORM -->
+
                     <div v-if="showForm" class="nova-card p-4 mb-4">
                         <h6 class="fw-bold mb-3">
                             {{ editId ? 'Edit Trek' : 'New Trek' }}
@@ -313,7 +319,8 @@ const AdminPanel = {
                         </div>
                     </div>
 
-                    <!-- assign guide panel -->
+                    <!-- ASSIGN GUIDE PANNEL -->
+
                     <div v-if="showAssign"
                         class="nova-card p-4 mb-4"
                         style="border-left:4px solid #e67e22">
@@ -344,7 +351,8 @@ const AdminPanel = {
                         </div>
                     </div>
 
-                    <!-- trek cards -->
+                    <!-- TREK CARD PAGE -->
+
                     <div v-if="busy" class="spin-area">
                         <div class="spinner-border"
                             style="color:#1B4F72"></div>
@@ -360,10 +368,11 @@ const AdminPanel = {
                                 style="overflow:hidden">
 
                                 <!-- trek image -->
+
                                 <div style="height:150px;
                                     position:relative; overflow:hidden">
                                     <img
-                                        :src="getTrekImage(t.region, t.title, t.image_key || '')"
+                                        :src="getTrekImage(t.region, t.title)"
                                         :alt="t.title"
                                         style="width:100%; height:100%;
                                         object-fit:cover"/>
@@ -404,7 +413,8 @@ const AdminPanel = {
                                         </span>
                                     </div>
 
-                                    <!-- seat bar -->
+                                    <!-- SEAT CAPACITY -->
+
                                     <div class="mb-3">
                                         <div class="d-flex
                                             justify-content-between
@@ -433,7 +443,8 @@ const AdminPanel = {
                                         Guide: {{ t.guide_name }}
                                     </div>
 
-                                    <!-- action buttons -->
+                                    <!-- buttons -->
+
                                     <div class="d-flex gap-1">
                                         <button
                                             class="btn btn-sm
@@ -464,6 +475,7 @@ const AdminPanel = {
                 </div>
 
                 <!-- ── GUIDES PAGE ── -->
+                
                 <div v-if="page==='guides'">
                     <div class="d-flex justify-content-between
                         align-items-center mb-4">
@@ -769,6 +781,7 @@ const AdminPanel = {
         function getTrekImage(region, title, imageKey='') {
 
           const myImageMap = {
+
         // specific trek names
         'kedarnath' : 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=70',
         'roopkund'  : 'https://images.unsplash.com/photo-1612438214708-f428a707dd4e?w=400&q=70',
@@ -776,7 +789,7 @@ const AdminPanel = {
         'triund'    : 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=70',
         'valley'    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70',
 
-        
+        // nature themes (add your own!)
         'snow'      : 'https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&q=70',
         'forest'    : 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=70',
         'river'     : 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70',
@@ -795,23 +808,25 @@ const AdminPanel = {
         'uttarakhand':'https://images.unsplash.com/photo-1623838978580-ef52ec53b4b1?w=400&q=70',
     }
 
-    
+    // STEP 1 → check image_key first (admin gave specific keyword)
     if (imageKey && imageKey.trim() !== '') {
         const k = imageKey.toLowerCase().trim()
         if (myImageMap[k]) return myImageMap[k]
     }
 
+    // STEP 2 → check title words
     const t = title.toLowerCase()
     for (const key in myImageMap) {
         if (t.includes(key)) return myImageMap[key]
     }
 
+    // STEP 3 → check region words
     const r = region.toLowerCase()
     for (const key in myImageMap) {
         if (r.includes(key)) return myImageMap[key]
     }
 
-    
+    // STEP 4 → nothing matched, show default
     return 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70'
 }
         

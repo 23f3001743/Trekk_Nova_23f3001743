@@ -4,7 +4,8 @@ const LoginPage = {
     <div class="login-wrapper">
         <div class="login-box">
 
-            <!-- mountain images strip -->
+            <!-- SMALL MOUNTAINS IMAGES -->
+
             <div class="mountain-strip">
                 <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200&q=70" alt="mountain"/>
                 <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=70" alt="peak"/>
@@ -12,14 +13,14 @@ const LoginPage = {
                 <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&q=70" alt="lake"/>
             </div>
 
-            <!-- brand -->
+            
             <div class="text-center mb-4">
                 <i class="bi bi-binoculars" style="font-size:2.5rem; color:#1B4F72"></i>
                 <h4 class="fw-bold mt-1" style="color:#1B4F72">TrekkNova</h4>
                 <p class="text-muted small">Discover Your Next Peak</p>
             </div>
 
-            <!-- tab switch -->
+            
             <div class="d-flex mb-4 p-1 gap-1"
                 style="background:#f0f0f0; border-radius:10px">
                 <button class="btn flex-fill fw-500"
@@ -30,7 +31,7 @@ const LoginPage = {
                     @click="mode='register'">Register</button>
             </div>
 
-            <!-- notice message -->
+            <!-- ALERT message -->
             <div v-if="notice" class="alert alert-nova py-2"
                 :class="isErr ? 'alert-danger' : 'alert-success'">
                 {{ notice }}

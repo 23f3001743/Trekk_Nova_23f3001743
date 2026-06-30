@@ -12,8 +12,10 @@ axios.interceptors.request.use(config => {
 
 const TrekkNova = {
     template: `
+
     <div>
-        <!-- navbar shown only when logged in -->
+      
+
         <div v-if="loggedIn"
             class="top-nav d-flex justify-content-between align-items-center">
             <span class="brand">
@@ -34,12 +36,14 @@ const TrekkNova = {
             </div>
         </div>
 
-        <!-- show login if not logged in -->
+        <!-- RELOGIN -->
+
         <div v-if="!loggedIn">
             <login-page @on-login="handleLogin"></login-page>
         </div>
 
-        <!-- show correct dashboard based on role -->
+        <!-- DASHBOARD BASED ON ROLES -->
+
         <div v-else>
             <admin-panel
                 v-if="activeUser?.role === 'admin'"
@@ -63,7 +67,7 @@ const TrekkNova = {
         const activeUser = ref(null)
         const loggedIn   = computed(() => !!activeUser.value)
 
-        
+   
         onMounted(() => {
             const token = localStorage.getItem('token')
             const saved = localStorage.getItem('user')
