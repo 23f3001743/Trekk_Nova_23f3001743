@@ -30,7 +30,7 @@ const AdminPanel = {
                         @click="page='trekkers'; fetchTrekkers()">
                         <i class="bi bi-people"></i>Trekkers
                     </a>
-                    <a class="side-link" :class="{active: page==='bookings'}"
+                    <a class="side-link" :class="{active: page===' s'}"
                         @click="page='bookings'; fetchBookings()">
                         <i class="bi bi-journal-check"></i>Bookings
                     </a>
@@ -58,14 +58,14 @@ const AdminPanel = {
                             alt="mountains"
                             style="width:100%; height:100%; object-fit:cover"/>
                         <div style="position:absolute; inset:0;
-                            background:rgba(27,79,114,0.75);
+                            background:rgba(58, 119, 159, 0.75);
                             display:flex; align-items:center; padding:24px">
                             <div>
                                 <h4 class="text-white fw-bold mb-1">
                                     <i class="bi bi-compass me-2"></i>
                                     Welcome, {{ user?.full_name }}!
                                 </h4>
-                                <p class="text-white-50 mb-0 small">
+                                <p class="text-dark fw-semibold mb-0" >
                                     Manage your TrekkNova operations from here
                                 </p>
                             </div>
@@ -660,10 +660,44 @@ const AdminPanel = {
 
                 <!-- ── BOOKINGS PAGE ── -->
                 <div v-if="page==='bookings'">
-                    <h4 class="fw-bold mb-4">
-                        <i class="bi bi-journal-check me-2"
-                            style="color:#1B4F72"></i>All Bookings
+                    <div class="d-flex justify-content-between
+                    align-items-center mb-4">
+                    
+                    <h4 class="fw-bold mb-0">
+                    <i class="bi bi-journal-check me-2"
+                    style="color:#1B4F72"></i>All Bookings
                     </h4>
+        
+                    <!-- status filter -->
+        
+                    <div class="d-flex gap-2">
+                    <button class="btn btn-sm"
+                    
+                    :class="bookingFilter===''
+                    ? 'btn-nova' : 'btn-outline-secondary'"
+                    @click="bookingFilter=''; fetchBookings()">
+                    All
+                    </button>
+                    <button class="btn btn-sm btn-outline-success"
+                    @click="bookingFilter='Booked';
+                    fetchBookingsByStatus('Booked')">
+                    Booked
+                    </button>
+    
+                    <button class="btn btn-sm btn-outline-danger"
+                    @click="bookingFilter='Cancelled';
+                    fetchBookingsByStatus('Cancelled')">
+                    Cancelled
+                    </button>
+            
+                    <button class="btn btn-sm btn-outline-info"
+                    @click="bookingFilter='Completed';
+                    fetchBookingsByStatus('Completed')">
+                    Completed
+                    </button>
+                    </div>
+                  </div>
+                   
                     <div class="nova-card">
                         <table class="table tbl-nova
                             table-hover mb-0">
@@ -738,6 +772,7 @@ const AdminPanel = {
         const trekkerList   = ref([])
         const bookingList   = ref([])
         const searchInput   = ref('')
+        const bookingFilter = ref('')
 
         const showForm      = ref(false)
         const showGuideForm = ref(false)
@@ -859,6 +894,17 @@ const AdminPanel = {
                 }
             }
         }
+
+        async function fetchBookingsByStatus(status) {
+    try {
+        const r = await axios.get(
+            `/api/admin/bookings/history?status=${status}`
+        )
+        bookingList.value = r.data.bookings || []
+    } catch(e) {
+        showNotice('Could not load', true)
+    }
+}
 
         async function fetchTreks() {
             busy.value = true
@@ -987,7 +1033,8 @@ const AdminPanel = {
             trekList, guideList, trekkerList, bookingList,
             searchInput, showForm, showGuideForm, showAssign,
             editId, targetTrek, pickedGuide,
-            tripForm, guideForm,
+            tripForm, guideForm,bookingFilter,
+            fetchBookingsByStatus,
             goToDashboard, fetchTreks, fetchGuides,
             fetchTrekkers, fetchBookings,
             submitTrek, openEdit, resetForm, removeTrek,

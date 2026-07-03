@@ -364,3 +364,25 @@ def get_chart_data():
         'by_status'   : [{'label': r.booking_status,  'count': r.total} for r in by_status],
         'monthly'     : monthly
     }), 200
+
+
+
+@admin_bp.route('/bookings/history', methods=['GET'])
+@only_admin
+def booking_history():
+    status = request.args.get('status', '')
+    query  = Booking.query
+
+    if status:
+        query = query.filter(
+            Booking.booking_status == status
+        )
+
+    all_bookings = query.order_by(
+        Booking.booked_at.desc()
+    ).all()
+
+    return jsonify({
+        'total'   : len(all_bookings),
+        'bookings': [b.to_dict() for b in all_bookings]
+    }), 200

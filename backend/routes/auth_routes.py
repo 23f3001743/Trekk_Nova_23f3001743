@@ -115,3 +115,7 @@ def update_profile():
 
     db.session.commit()
     return jsonify({'msg': 'Profile updated', 'user': user.to_dict()}), 200
+
+
+
+

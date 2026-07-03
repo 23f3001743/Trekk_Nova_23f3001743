@@ -21,10 +21,14 @@ def create_app():
     from routes.auth_routes import auth_bp
     from routes.admin_routes import admin_bp
     from routes.staff_routes import staff_bp
+    from routes.trekker_routes import trekker_bp
+
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     app.register_blueprint(staff_bp, url_prefix='/api/staff')
+    app.register_blueprint(trekker_bp, url_prefix='/api/trekker')
 
+    
     @app.route('/')
     @app.route('/<path:path>')
     def serve_app(path=''):

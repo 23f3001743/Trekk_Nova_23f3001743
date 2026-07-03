@@ -30,6 +30,7 @@ class Booking(db.Model):
     )
 
     def to_dict(self):
+        trek = self.trek_info
         return {
             'id'             : self.id,
             'trekker_id'     : self.trekker_id,
