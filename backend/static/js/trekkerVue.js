@@ -7,8 +7,8 @@ const TrekkerPanel = {
             <!-- SIDE BAR -->
             <div class="col-md-2 side-nav d-none d-md-block">
                 <div class="px-3 py-3">
-                    <small class="text-muted text-uppercase fw-bold"
-                        style="font-size:10px">Trekker Panel</small>
+                    <small class=" text-uppercase fw-semibold"
+                        style="font-size:12px; color:black">Trekker Panel</small>
                 </div>
                 <nav>
                     <a class="side-link"
@@ -53,7 +53,7 @@ const TrekkerPanel = {
 
                     <!-- hero banner -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:200px">
+                        style="position:relative; height:220px">
                         <img
                             src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=80"
                             alt="trekking"
@@ -66,10 +66,10 @@ const TrekkerPanel = {
                             <h3 class="text-white fw-bold mb-2">
                                 Hey {{ user?.full_name }}! 🏔️
                             </h3>
-                            <p class="text-white-50 mb-3">
+                            <p class="text-white mb-4 fw-semibold ">
                                 Ready for your next adventure?
                             </p>
-                            <button class="btn btn-coral px-4"
+                            <button class="btn btn-coral text-dark px-4"
                                 @click="page='browse'; loadTreks()">
                                 <i class="bi bi-search me-2"></i>
                                 Explore Treks
@@ -80,33 +80,35 @@ const TrekkerPanel = {
                     <!-- statistic data  boxes -->
                     <div class="row g-3 mb-4" v-if="summary">
                         <div class="col-6 col-md-3">
-                            <div class="stat-box">
+                            <div class="stat-box card p-3 text-center border border-3  rounded-4 h-100 "
+                                style="border-color: var(--bs-purple) !important;">
                                 <div class="stat-num">
                                     {{ summary.total_bookings }}
                                 </div>
                                 <div class="stat-lbl">Total Bookings</div>
                             </div>
                         </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-box">
-                                <div class="stat-num"
-                                    style="color:#1e8449">
+                        <div class="col-6 col-md-3 ">
+                            <div class="stat-box card p-3 text-center border border-3 border-info rounded-4 h-100 ">
+                                <div class="stat-num "
+                                    style="color:#54AAFF">
                                     {{ summary.active }}
                                 </div>
-                                <div class="stat-lbl">Active</div>
+                                <div class="stat-lbl  ">Active</div>
                             </div>
                         </div>
                         <div class="col-6 col-md-3">
-                            <div class="stat-box">
-                                <div class="stat-num"
-                                    style="color:#5499C7">
+                            <div class="stat-box card p-3 text-center border border-3 border-success rounded-4 h-100">
+                                <div class="stat-num "
+                                    style="color:green ;">
                                     {{ summary.completed }}
                                 </div>
                                 <div class="stat-lbl">Completed</div>
                             </div>
                         </div>
                         <div class="col-6 col-md-3">
-                            <div class="stat-box">
+                            <div class="stat-box card p-3 text-center border border-3  rounded-4 h-100" 
+                              style="border-color: var(--bs-orange) !important;">
                                 <div class="stat-num"
                                     style="color:#e67e22">
                                     {{ openTreks?.length || 0 }}
@@ -121,35 +123,36 @@ const TrekkerPanel = {
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-4"
                             v-for="t in (openTreks || []).slice(0,3)" :key="t.id">
-                            <div class="nova-card"
+                            <div class="nova-card h-100"
                                 style="overflow:hidden">
-                                <div style="height:130px; position:relative">
+                                
+                                <div style="height:230px; position:relative; overflow:hidden">
                                     <img
-                                        :src="getTrekImg(t.region,
+                                        :src="getTrekImage(t.region,
                                             t.title, t.image_key)"
                                         :alt="t.title"
                                         style="width:100%; height:100%;
-                                        object-fit:cover"/>
+                                        object-fit:cover; transition:transform 0.3s "/>
                                     <span :class="getDiffTag(t.difficulty_level)"
                                         style="position:absolute;
-                                        top:8px; right:8px;
+                                        top:10px; right:10px;
                                         font-size:11px">
                                         {{ t.difficulty_level }}
                                     </span>
                                 </div>
                                 <div class="p-3">
-                                    <div class="fw-bold small mb-1">
+                                    <div class="fw-bold  fs-5 mb-1">
                                         {{ t.title }}
                                     </div>
-                                    <div class="text-muted small mb-2">
+                                    <div class="text-dark small fw-semibold mb-2 ">
                                         <i class="bi bi-geo-alt me-1"></i>
                                         {{ t.region }}
                                     </div>
                                     <div class="d-flex
                                         justify-content-between
                                         align-items-center">
-                                        <span class="fw-bold"
-                                            style="color:#1B4F72">
+                                        <span class="fw-semibold fs-5 bg-success"
+                                            style="color:white">
                                             ₹{{ t.cost_per_person }}
                                         </span>
                                         <button class="btn btn-nova btn-sm"
@@ -163,6 +166,26 @@ const TrekkerPanel = {
                     </div>
                 </div>
 
+                <!-- browse more CTA -->
+
+                <div class="nova-card mb-4 p-4 text-center"    
+                v-if="(openTreks || []).length > 3"    
+                style="background:linear-gradient(135deg, #1B4F72, #5499C7)">    
+                <i class="bi bi-compass text-white mb-2"        
+                style="font-size:2rem"></i>    
+                <h6 class="text-white fw-bold mb-1">       
+                {{ openTreks.length - 3 }} more adventures Trek waiting    
+                </h6>    
+                <p class="text-white  small mb-3">        
+                Discover treks across every region with difficulty level    
+                </p>    
+                <button class="btn btn-coral text-dark px-4"        
+                @click="page='browse'; loadTreks()">        
+                <i class="bi bi-search me-2"></i>        
+                Search for More Treks    
+                </button>
+                </div>
+
                 <!-- search treks -->
                 <div v-if="page==='browse'">
                     <h4 class="fw-bold mb-4">
@@ -173,15 +196,15 @@ const TrekkerPanel = {
                     <!-- filters -->
                     <div class="nova-card p-3 mb-4">
                         <div class="row g-2">
-                            <div class="col-md-4">
+                            <div class="col-md-4 ">
                                 <input v-model="filters.q"
-                                    class="form-control"
+                                    class="form-control  fw-semibold"
                                     placeholder="Search treks..."
                                     @input="loadTreks"/>
                             </div>
                             <div class="col-md-3">
                                 <select v-model="filters.difficulty"
-                                    class="form-select"
+                                    class="form-select text-muted"
                                     @change="loadTreks">
                                     <option value="">Any Difficulty</option>
                                     <option>Easy</option>
@@ -191,13 +214,13 @@ const TrekkerPanel = {
                             </div>
                             <div class="col-md-3">
                                 <input v-model="filters.region"
-                                    class="form-control"
+                                    class="form-control  "
                                     placeholder="Filter by region"
                                     @input="loadTreks"/>
                             </div>
                             <div class="col-md-2">
                                 <button
-                                    class="btn btn-outline-secondary w-100"
+                                    class="btn btn-outline-danger w-100 border-2 text-dark fw-semibold"
                                     @click="resetFilters">
                                     Reset
                                 </button>
@@ -211,7 +234,7 @@ const TrekkerPanel = {
                     </div>
 
                     <div v-else>
-                        <p class="text-muted small mb-3">
+                        <p class="text-muted small fw-semibold mb-3">
                             {{ trekResults.length }} trek(s) found
                         </p>
                         <div class="row g-3">
@@ -227,28 +250,29 @@ const TrekkerPanel = {
                                     style="overflow:hidden">
 
                                     <!-- image with overlay -->
-                                    <div style="height:170px;
+
+                                    <div style="height:300px;
                                         position:relative; overflow:hidden">
                                         <img
-                                            :src="getTrekImg(t.region,
+                                            :src="getTrekImage(t.region,
                                                 t.title, t.image_key)"
                                             :alt="t.title"
                                             style="width:100%; height:100%;
                                             object-fit:cover;
-                                            transition:transform 0.3s"
+                                            transition:transform 0.2s"
                                             @mouseover="$event.target.style.transform='scale(1.05)'"
                                             @mouseout="$event.target.style.transform='scale(1)'"/>
                                         <div style="position:absolute;
                                             bottom:0; left:0; right:0;
                                             background:linear-gradient(
-                                                transparent,rgba(0,0,0,0.6));
-                                            padding:10px 12px">
-                                            <div class="text-white fw-bold
-                                                small">
+                                                transparent,rgba(0,0,0,0.75));
+                                            padding:18px 14px">
+                                            <div class="text-white fw-semibold"
+                                                style="font-size:19px">
                                                 {{ t.title }}
                                             </div>
-                                            <div class="text-white-50"
-                                                style="font-size:11px">
+                                            <div class="text-white fw-semibold"
+                                                style="font-size:15px; opacity:0.95">
                                                 <i class="bi bi-geo-alt me-1"></i>
                                                 {{ t.region }}
                                             </div>
@@ -256,36 +280,66 @@ const TrekkerPanel = {
                                         <span :class="getDiffTag(t.difficulty_level)"
                                             style="position:absolute;
                                             top:10px; right:10px;
-                                            font-size:11px">
+                                            font-size:12px">
                                             {{ t.difficulty_level }}
                                         </span>
                                     </div>
 
                                     <div class="p-3">
-                                        <div class="row g-1 small
-                                            text-muted mb-3">
+                                        <div class="row g-1 "
+                                            style="color:black; font-weight:500 ;font-size:15px">
                                             <div class="col-6">
-                                                <i class="bi bi-calendar me-1"></i>
+                                                <i class="bi bi-calendar me-1 "></i>
                                                 {{ t.trip_start }}
                                             </div>
-                                            <div class="col-6">
-                                                <i class="bi bi-clock me-1"></i>
+                                            <div class="col-6" style="color:black; font-weight:500 ">
+                                                <i class="bi bi-clock me-1" ></i>
                                                 {{ t.days_required }} days
                                             </div>
                                         </div>
+
+                              <!-- overview toggle -->
+
+                                  <div class="mb-2" v-if="t.overview">
+
+                                    <!-- toggle button  -->
+                                    <span
+                                          @click="expanded[t.id] = !expanded[t.id]"
+                                          style="font-size:14px; color:#007FFF ;
+                                          cursor:pointer; font-weight:600;
+                                          display:inline-flex; align-items:center; gap:4px">
+                                        <i :class="expanded[t.id]
+                                          ? 'bi bi-chevron-up fw-bold'
+                                          : 'bi bi-chevron-down fw-bold'">
+                                        </i>
+                                        {{ expanded[t.id] ? 'Show Less' : 'Know More about this trek' }}
+                                    </span>
+
+                                    <!-- text only shows when expanded -->    
+                                    <div v-if="expanded[t.id]"
+                                        class="mt-2 p-2  text-dark fw-semibold "
+                                        style="background:#f4f7fa;
+                                        border-radius:18px;
+                                        border:2px solid #d0d7de;
+                                        font-size:15px;
+                                        line-height:1.6">
+                                        {{ t.overview }}
+                                    </div>
+                                </div>
 
                                         <!-- seats availablity data -->
                                         <div class="mb-3">
                                             <div class="d-flex
                                                 justify-content-between
-                                                small mb-1">
-                                                <span class="text-muted">
+                                                small mb-1 fs-6  text-muted">
+                                                 <span style="color:; ">
                                                     Seats left
                                                 </span>
                                                 <span :class="t.seats_remaining < 5
                                                     ? 'text-danger fw-bold'
                                                     : 'fw-bold'">
-                                                    {{ t.seats_remaining }}/{{ t.capacity }}
+                                                    <span :class="t.seats_remaining < 5 ? 'text-danger fw-bold' : 'fw-bold'" 
+                                                    style="color:#1a1a1a">{{ t.seats_remaining }}/{{ t.capacity }}</span>
                                                 </span>
                                             </div>
                                             <div class="seat-track">
@@ -303,12 +357,12 @@ const TrekkerPanel = {
                                             justify-content-between
                                             align-items-center">
                                             <div>
-                                                <div class="fw-bold fs-5"
-                                                    style="color:#1B4F72">
+                                                <div class="fw-semibold fs-5 bg-success "
+                                                    style="color:white ">
                                                     ₹{{ t.cost_per_person }}
                                                 </div>
-                                                <div class="text-muted"
-                                                    style="font-size:11px">
+                                                <div class="text-dark  ; fw-"
+                                                    style="font-size:14px">
                                                     per person
                                                 </div>
                                             </div>
@@ -321,7 +375,7 @@ const TrekkerPanel = {
                                         </div>
 
                                         <div v-if="t.guide_name"
-                                            class="mt-2 small text-muted">
+                                            class="mt-2 medium text-muted fw-semibold bg-primary-subtle">
                                             <i class="bi bi-person-badge me-1"></i>
                                             Guide: {{ t.guide_name }}
                                         </div>
@@ -334,9 +388,9 @@ const TrekkerPanel = {
 
                 <!--trekkers bookings page -->
                 <div v-if="page==='bookings'">
-                    <h4 class="fw-bold mb-4">
+                    <h4 class="fw-bold mb-4 ">
                         <i class="bi bi-journal-check me-2"
-                            style="color:#1B4F72"></i>My Bookings
+                            style="color:navy"></i>My Bookings
                     </h4>
 
                     <div v-if="myBookings.length===0"
@@ -357,23 +411,23 @@ const TrekkerPanel = {
                                 <div class="d-flex justify-content-between
                                     align-items-start mb-2">
                                     <div>
-                                        <div class="fw-bold">
+                                        <div class="fw-bold" style="color:#080E4B; font-size:20px">
                                             {{ b.trek_title }}
                                         </div>
-                                        <div class="text-muted small">
+                                        <div class="text small fw-semibold">
                                             <i class="bi bi-geo-alt me-1"></i>
                                             {{ b.trek_region }}
                                         </div>
-                                        <div class="text-muted small">
-                                            <i class="bi bi-calendar me-1"></i>
+                                        <div class="text- small fw-semibold">
+                                            <i class="bi bi-calendar  me-1"></i>
                                             Trip: {{ b.trip_start }}
                                         </div>
-                                        <div class="text-muted small">
+                                        <div class="text- small fw-semibold">
                                             <i class="bi bi-clock me-1"></i>
                                             Booked: {{ b.booked_at }}
                                         </div>
                                     </div>
-                                    <span class="badge"
+                                    <span class="badge" 
                                         :class="b.booking_status==='Booked'
                                         ? 'bg-success'
                                         : b.booking_status==='Cancelled'
@@ -385,7 +439,7 @@ const TrekkerPanel = {
                                 <!-- payment badge -->
                                 <div class="mb-2">
                                     <span v-if="b.payment_status==='Pending'"
-                                        class="badge bg-warning text-dark">
+                                        class="badge bg-warning text-dark  ">
                                         Payment Pending
                                     </span>
                                     <span v-else class="badge bg-success">
@@ -399,8 +453,8 @@ const TrekkerPanel = {
                                 b.payment_status==='Pending'"                                   
                                 class="p-3 mb-2 rounded"
                                     style="background:#f4f7fa">
-                                    <p class="small fw-bold mb-2"
-                                        style="color:#1B4F72">
+                                    <p class="medium fw-bold mb-2"
+                                        style="color:#F00E0E">
                                         <i class="bi bi-credit-card me-1"></i>
                                         Pay ₹{{ b.cost_per_person }}
                                     </p>
@@ -451,7 +505,7 @@ const TrekkerPanel = {
                                 <!-- cancel button -->
                                 <button
                                     v-if="b.booking_status==='Booked'"
-                                    class="btn btn-sm btn-outline-danger w-100"
+                                    class="btn btn-sm btn-outline-danger w-90 fw-bold"
                                     @click="doCancel(b.id)">
                                     Cancel Booking
                                 </button>
@@ -477,27 +531,27 @@ const TrekkerPanel = {
 
     
                 <!-- status filter tabs -->
-                <div class="d-flex gap-2 mb-4">
-                <button class="btn btn-sm"
+                <div class="d-flex gap-2 mb-4 ">
+                <button class="btn btn-sm   fw-semibold" 
                 :class="historyFilter===''
-                ? 'btn-nova' : 'btn-outline-secondary'"
+                ? 'btn-nova' : 'btn-outline-nova'"
                 @click="historyFilter=''; loadHistory()">
                 All
                 </button>
         
-                <button class="btn btn-sm"
-                :class="historyFilter==='Booked'
-                ? 'btn-nova' : 'btn-outline-secondary'"
+                <button class="btn btn-sm fw-semibold"
+                :class="historyFilter==='Booked' 
+                ? 'btn-success' : 'btn-outline-success'"
                 @click="historyFilter='Booked'; loadHistory()">
                 Active
                 </button>
-                <button class="btn btn-sm"
+                <button class="btn btn-sm fw-semibold" 
                 :class="historyFilter==='Completed'
-                ? 'btn-nova' : 'btn-outline-secondary'"
+                ? 'btn-info' : 'btn-outline-info'"
                 @click="historyFilter='Completed'; loadHistory()">
                 Completed
                 </button>
-                <button class="btn btn-sm"
+                <button class="btn btn-sm  fw-semibold"
                 :class="historyFilter==='Cancelled'
                 ? 'btn-danger' : 'btn-outline-danger'"
                 @click="historyFilter='Cancelled'; loadHistory()">
@@ -558,9 +612,9 @@ const TrekkerPanel = {
                             style="color:#1B4F72"></i>My Profile
                     </h4>
                     <div class="nova-card p-4" style="max-width:540px">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Full Name</label>
+                        <div class="row g-3 text-dark">
+                            <div class="col-md-6 " >
+                                <label class="form-label ">Full Name</label>
                                 <input v-model="myProfile.full_name"
                                     class="form-control"/>
                             </div>
@@ -639,6 +693,7 @@ const TrekkerPanel = {
         const openTreks   = ref([])
         const myBookings  = ref([])
         const trekResults = ref([])
+        const expanded    = ref({})
         const historyList = ref([])
         const payForms    = ref({})
         const payingId    = ref(null)
@@ -666,31 +721,6 @@ const TrekkerPanel = {
             return d==='Easy'     ? 'tag-easy'     :
                    d==='Moderate' ? 'tag-moderate' :
                    'tag-hard'
-        }
-
-        function getTrekImg(region, title, imageKey='') {
-            const map = {
-                'kedarnath' : 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=70',
-                'roopkund'  : 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=70',
-                'hampta'    : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70',
-                'triund'    : 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=70',
-                'valley'    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70',
-                'manali'    : 'https://images.unsplash.com/photo-1626017740083-3c29e524e3f5?w=400&q=70',
-                'ladakh'    : 'https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?w=400&q=70',
-                'himachal'  : 'https://images.unsplash.com/photo-1597977084860-23cf629c5588?w=400&q=70',
-                'uttarakhand':'https://images.unsplash.com/photo-1623838978580-ef52ec53b4b1?w=400&q=70',
-            }
-            if (imageKey && map[imageKey.toLowerCase()])
-                return map[imageKey.toLowerCase()]
-            const t = title.toLowerCase()
-            const r = region.toLowerCase()
-            for (const key in map) {
-                if (t.includes(key)) return map[key]
-            }
-            for (const key in map) {
-                if (r.includes(key)) return map[key]
-            }
-            return 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70'
         }
 
         function initPayForm(id) {
@@ -777,8 +807,11 @@ const TrekkerPanel = {
                 const r = await axios.post('/api/trekker/book',
                     { trek_id: tid })
                 showNotice(r.data.msg)
-                loadHome()
-                if (trekResults.value.length > 0) loadTreks()
+                
+                page.value = 'bookings'
+                await loadMyBookings()
+
+                window.scrollTo({ top: 0, behavior: 'smooth' })
             } catch(e) {
                 showNotice(e.response?.data?.msg || 'Booking failed', true)
             }
@@ -842,13 +875,13 @@ const TrekkerPanel = {
             page, loading, notice, isErr,
             summary, openTreks, myBookings,
             trekResults, historyList,
-            filters, myProfile,
+            filters, myProfile,expanded,
             payForms, payingId,historyFilter,
             loadHome, loadTreks, loadMyBookings,
             loadHistory, resetFilters,
             bookNow, doCancel, doPay,
             saveProfile, doExport,
-            getDiffTag, getTrekImg
+            getDiffTag, getTrekImage
         }
     }
 }

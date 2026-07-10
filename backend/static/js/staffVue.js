@@ -8,8 +8,8 @@ const StaffPanel = {
             <!-- SIDEBAR -->
             <div class="col-md-2 side-nav d-none d-md-block">
                 <div class="px-3 py-3">
-                    <small class="text-muted text-uppercase fw-bold"
-                        style="font-size:10px">Guide Panel</small>
+                    <small class="text-dark text-uppercase fw-semibold "
+                        style="font-size:13px">Guide Panel</small>
                 </div>
                 <nav>
                     <a class="side-link"
@@ -39,20 +39,20 @@ const StaffPanel = {
 
                     <!-- WELCOME GREET -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:130px">
+                        style="position:relative; height:120px">
                         <img
                             src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=1200&q=70"
                             alt="mountains"
                             style="width:100%; height:100%; object-fit:cover"/>
                         <div style="position:absolute; inset:0;
-                            background:rgba(27,79,114,0.72);
+                            background:rgba(91, 164, 212, 0.72);
                             display:flex; align-items:center; padding:24px">
                             <div>
-                                <h4 class="text-white fw-bold mb-1">
-                                    <i class="bi bi-compass me-2"></i>
+                                <h4 class="text-white fw-bold mb-2 fs-3  ">
+                                    <i class="bi bi-compass  me-2 "></i>
                                     Welcome, {{ user?.full_name }}!
                                 </h4>
-                                <p class="text-white-50 mb-0 small">
+                                <p class="text-white mb-1 "style="font-size:15px">
                                     Manage your assigned treks from here
                                 </p>
                             </div>
@@ -60,23 +60,24 @@ const StaffPanel = {
                     </div>
 
                     <!-- STAT BOXES -->
-                    <div class="row g-3 mb-4" v-if="dashStats">
+
+                    <div class="row g-3 mb-4 " v-if="dashStats">
                         <div class="col-6">
-                            <div class="nova-card p-3">
+                            <div class="nova-card p-3 d-flex align-items-center " style="min-height:110px">
                                 <div class="d-flex align-items-center gap-3">
-                                    <div class="rounded-circle d-flex
+                                    <div class="rounded-circle d-flex 
                                         align-items-center justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#d6eaf8">
+                                        background:purple">
                                         <i class="bi bi-map"
-                                            style="color:#1B4F72;
+                                            style="color:navy;
                                             font-size:1.3rem"></i>
                                     </div>
                                     <div>
-                                        <div class="stat-num">
+                                        <div class="stat-num ">
                                             {{ dashStats.assigned_treks }}
                                         </div>
-                                        <div class="stat-lbl">
+                                        <div class="stat-lbl fs-6 ">
                                             Assigned Treks
                                         </div>
                                     </div>
@@ -89,14 +90,14 @@ const StaffPanel = {
                                     <div class="rounded-circle d-flex
                                         align-items-center justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#d5f5e3">
+                                        background:#41E7A7">
                                         <i class="bi bi-people"
-                                            style="color:#1e8449;
+                                            style="color:dark;
                                             font-size:1.3rem"></i>
                                     </div>
                                     <div>
-                                        <div class="stat-num"
-                                            style="color:#1e8449">
+                                        <div class="stat-num  "
+                                            style="color:#1e8449 ">
                                             {{ dashStats.total_participants }}
                                         </div>
                                         <div class="stat-lbl">
@@ -107,12 +108,12 @@ const StaffPanel = {
                             </div>
                         </div>
                     </div>
-
-                    
-                    <h6 class="fw-bold mb-3">
-                        <i class="bi bi-map me-2"
-                            style="color:#1B4F72"></i>My Assigned Treks
+      
+                    <h6 class="fw-bold mb-3 mt-5 fs-5 ">
+                        <i class="bi bi-map me-2 fw-semibold "
+                            style="color:black"></i>My Assigned Treks
                     </h6>
+
                     <div class="row g-3">
                         <div v-if="myTreks.length===0"
                             class="col-12 text-center py-4 text-muted">
@@ -124,11 +125,11 @@ const StaffPanel = {
 
                                 <!-- trek image -->
 
-                                <div style="height:120px; overflow:hidden;
+                                <div style="height:300px; overflow:hidden;
                                     border-radius:10px; margin-bottom:10px;
                                     position:relative">
                                     <img
-                                        :src="getTrekImg(t.region, t.title)"
+                                        :src="getTrekImage(t.region, t.title,t.image_key)"
                                         :alt="t.title"
                                         style="width:100%; height:100%;
                                         object-fit:cover"/>
@@ -140,13 +141,20 @@ const StaffPanel = {
                                     </span>
                                 </div>
 
-                                <div class="fw-bold mb-1">{{ t.title }}</div>
-                                <div class="text-muted small mb-2">
-                                    <i class="bi bi-geo-alt me-1"></i>
+                                <div class="fw-semibold mb-1 fs-5">{{ t.title }}</div>
+                                <div class="text-dark small fw-semibold  mb-3">
+                                    <i class="bi bi-geo-alt fw-bold text-dark me-1"></i>
                                     {{ t.region }}
                                 </div>
-                                <div class="small text-muted mb-3">
-                                    Seats: {{ t.seats_remaining }}/{{ t.capacity }}
+                                <div class="d-flex
+                                            justify-content-between
+                                            small mb-1">
+                                            <span class="text-dark fw-semibold fs-6 ">
+                                                Seats
+                                            </span>
+                                            <span class="fw-bold fs-6">
+                                                {{ t.seats_remaining }}/{{ t.capacity }}
+                                            </span>
                                 </div>
 
                                 <!-- SEAT CAPACITY -->
@@ -174,8 +182,8 @@ const StaffPanel = {
                 <!-- ── MY TREKS PAGE ── -->
                 <div v-if="page==='treks'">
                     <h4 class="fw-bold mb-4">
-                        <i class="bi bi-map me-2"
-                            style="color:#1B4F72"></i>My Assigned Treks
+                        <i class="bi bi-map me-2 "
+                            style="color:#1B4F72 "></i>My Assigned Treks
                     </h4>
 
                     <!-- participants panel -->
@@ -188,7 +196,7 @@ const StaffPanel = {
                                     style="color:#1B4F72"></i>
                                 Participants — {{ activeTrek.title }}
                             </h6>
-                            <button class="btn btn-sm btn-outline-secondary"
+                            <button class="btn btn-sm btn-outline-warning text-dark fw-semibold "
                                 @click="activeTrek=null">
                                 Close
                             </button>
@@ -196,13 +204,13 @@ const StaffPanel = {
 
                         <!-- UPDATE PAGE -->
                         <div class="d-flex gap-2 mb-4 flex-wrap
-                            align-items-end">
+                            align-items-end ">
                             <div>
-                                <label class="form-label small mb-1">
+                                <label class="form-label  mb-1">
                                     Trek Status
                                 </label>
                                 <select v-model="newStatus"
-                                    class="form-select form-select-sm"
+                                    class="form-select form-select-sm "
                                     style="width:150px">
                                     <option>Open</option>
                                     <option>Closed</option>
@@ -210,7 +218,7 @@ const StaffPanel = {
                                 </select>
                             </div>
                             <div>
-                                <label class="form-label small mb-1">
+                                <label class="form-label   mb-1">
                                     Seats Remaining
                                 </label>
                                 <input v-model="newSeats"
@@ -223,7 +231,7 @@ const StaffPanel = {
                                 @click="doUpdate(activeTrek.id)">
                                 <i class="bi bi-check me-1"></i>Update
                             </button>
-                            <button class="btn btn-coral btn-sm"
+                            <button class="btn btn-coral btn-sm text-dark"
                                 @click="doFinish(activeTrek.id)">
                                 <i class="bi bi-flag me-1"></i>
                                 Mark Complete
@@ -292,23 +300,23 @@ const StaffPanel = {
 
                                 <div class="d-flex justify-content-between
                                     mb-2">
-                                    <div class="fw-bold">{{ t.title }}</div>
+                                    <div class="fw-semibold fs-5 ">{{ t.title }}</div>
                                     <span class="badge"
                                         :class="getStatusColor(t.current_status)">
                                         {{ t.current_status }}
                                     </span>
                                 </div>
 
-                                <div class="text-muted small mb-1">
+                                <div class="text-muted fw-semibold small mb-3">
                                     <i class="bi bi-geo-alt me-1"></i>
                                     {{ t.region }}
                                 </div>
 
-                                <div class="text-muted small mb-3">
-                                    <i class="bi bi-calendar me-1"></i>
+                                <div class="text-dark  mb-3 fw-semibold">
+                                    <i class="bi bi-calendar me-1 fw-bold"></i>
                                     {{ t.trip_start }}
                                     &nbsp;|&nbsp;
-                                    <i class="bi bi-clock me-1"></i>
+                                    <i class="bi bi-clock me-1 fw-bold"></i>
                                     {{ t.days_required }} days
                                 </div>
 
@@ -316,11 +324,11 @@ const StaffPanel = {
                                 
                                 <div class="mb-3">
                                     <div class="d-flex
-                                        justify-content-between small mb-1">
-                                        <span class="text-muted">
+                                        justify-content-between  fw-semibold mb-1">
+                                        <span class="text-dark">
                                             Seats Remaining
                                         </span>
-                                        <span class="fw-bold">
+                                        <span class="fw-bold fs-6">
                                             {{ t.seats_remaining }}/{{ t.capacity }}
                                         </span>
                                     </div>
@@ -335,7 +343,7 @@ const StaffPanel = {
                                     </div>
                                 </div>
 
-                                <button class="btn btn-nova btn-sm w-100"
+                                <button class="btn btn-nova btn-sm w-100 mt-2"
                                     @click="openTrek(t)">
                                     <i class="bi bi-people me-1"></i>
                                     View and Manage Participants
@@ -380,28 +388,7 @@ const StaffPanel = {
             return m[s] || 'bg-secondary'
         }
 
-        function getTrekImg(region, title) {
-            const map = {
-                'kedarnath' : 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=70',
-                'roopkund'  : 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=70',
-                'hampta'    : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70',
-                'triund'    : 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=70',
-                'valley'    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70',
-                'manali'    : 'https://images.unsplash.com/photo-1626017740083-3c29e524e3f5?w=400&q=70',
-                'ladakh'    : 'https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?w=400&q=70',
-                'himachal'  : 'https://images.unsplash.com/photo-1597977084860-23cf629c5588?w=400&q=70',
-                'uttarakhand':'https://images.unsplash.com/photo-1623838978580-ef52ec53b4b1?w=400&q=70',
-            }
-            const t = title.toLowerCase()
-            const r = region.toLowerCase()
-            for (const key in map) {
-                if (t.includes(key)) return map[key]
-            }
-            for (const key in map) {
-                if (r.includes(key)) return map[key]
-            }
-            return 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70'
-        }
+  
 
         async function loadHome() {
             try {
@@ -469,7 +456,7 @@ const StaffPanel = {
             newStatus, newSeats,
             loadHome, loadMyTreks,
             openTrek, doUpdate, doFinish,
-            getStatusColor, getTrekImg
+            getStatusColor, getTrekImage
         }
     }
 }

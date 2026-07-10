@@ -10,28 +10,28 @@ const AdminPanel = {
 
             <div class="col-md-2 side-nav d-none d-md-block">
                 <div class="px-3 py-3">
-                    <small class="text-muted text-uppercase fw-bold"
-                        style="font-size:10px">Admin Panel</small>
+                    <small class=" text-uppercase fw-bold"
+                        style="color:black;font-size:12px">Admin Panel</small>
                 </div>
                 <nav>
                     <a class="side-link" :class="{active: page==='home'}"
-                        @click="goToDashboard()">
+                        @click="goToDashboard(); window.scrollTo(0,0)">
                         <i class="bi bi-grid"></i>Dashboard
                     </a>
                     <a class="side-link" :class="{active: page==='treks'}"
-                        @click="page='treks'; fetchTreks()">
+                        @click="page='treks'; fetchTreks() ; window.scrollTo(0,0)">
                         <i class="bi bi-map"></i>Treks
                     </a>
                     <a class="side-link" :class="{active: page==='guides'}"
-                        @click="page='guides'; fetchGuides()">
+                        @click="page='guides'; fetchGuides() ; window.scrollTo(0,0)">
                         <i class="bi bi-person-badge"></i>Guides
                     </a>
                     <a class="side-link" :class="{active: page==='trekkers'}"
-                        @click="page='trekkers'; fetchTrekkers()">
+                        @click="page='trekkers'; fetchTrekkers() ; window.scrollTo(0,0)">
                         <i class="bi bi-people"></i>Trekkers
                     </a>
-                    <a class="side-link" :class="{active: page===' s'}"
-                        @click="page='bookings'; fetchBookings()">
+                    <a class="side-link" :class="{active: page==='bookings'}"
+                        @click="page='bookings'; fetchBookings(); window.scrollTo(0,0)">
                         <i class="bi bi-journal-check"></i>Bookings
                     </a>
                 </nav>
@@ -52,7 +52,7 @@ const AdminPanel = {
 
                     <!-- Welcome Greet -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:140px">
+                        style="position:relative; height:150px">
                         <img
                             src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=70"
                             alt="mountains"
@@ -65,8 +65,8 @@ const AdminPanel = {
                                     <i class="bi bi-compass me-2"></i>
                                     Welcome, {{ user?.full_name }}!
                                 </h4>
-                                <p class="text-dark fw-semibold mb-0" >
-                                    Manage your TrekkNova operations from here
+                                <p class="text-white fw-semibold mb-0  " >
+                                       Manage your TrekkNova operations from here
                                 </p>
                             </div>
                         </div>
@@ -81,19 +81,19 @@ const AdminPanel = {
                                     <div class="rounded-circle d-flex align-items-center
                                         justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#d6eaf8">
+                                        background:#8E44AD">
                                         <i class="bi bi-map"
-                                            style="color:#1B4F72;font-size:1.2rem"></i>
+                                            style="color:black;font-size:1.4rem"></i>
                                     </div>
-                                    <div>
-                                        <div class="stat-num">
+                                    <div >
+                                        <div class="stat-num" >
                                             {{ dashStats.total_treks }}
                                         </div>
-                                        <div class="stat-lbl">Total Treks</div>
+                                        <div class="stat-lbl ">Total Treks</div>
                                     </div>
                                 </div>
-                                <a class="small text-decoration-none"
-                                    style="color:#1B4F72; cursor:pointer"
+                                <a class="small text-decoration-none fw-semibold"
+                                    style="color:#8E44AD; cursor:pointer font-size:154px"
                                     @click="page='treks'; fetchTreks()">
                                     View all treks
                                     <i class="bi bi-chevron-right"></i>
@@ -106,20 +106,20 @@ const AdminPanel = {
                                     <div class="rounded-circle d-flex align-items-center
                                         justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#d5f5e3">
+                                        background:#1e8449">
                                         <i class="bi bi-people"
-                                            style="color:#1e8449;font-size:1.2rem"></i>
+                                            style="color:black;font-size:1.4rem"></i>
                                     </div>
                                     <div>
                                         <div class="stat-num"
-                                            style="color:#1e8449">
+                                            style="color:green">
                                             {{ dashStats.total_trekkers }}
                                         </div>
                                         <div class="stat-lbl">Registered Trekkers</div>
                                     </div>
                                 </div>
-                                <a class="small text-decoration-none"
-                                    style="color:#1e8449; cursor:pointer"
+                                <a class="small text-decoration-none  fw-semibold"
+                                    style="color:#1e8449; cursor:pointerv;font-size:14px"
                                     @click="page='trekkers'; fetchTrekkers()">
                                     View all trekkers
                                     <i class="bi bi-chevron-right"></i>
@@ -132,20 +132,20 @@ const AdminPanel = {
                                     <div class="rounded-circle d-flex align-items-center
                                         justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#fdebd0">
+                                        background:#e67e22">
                                         <i class="bi bi-calendar-check"
-                                            style="color:#e67e22;font-size:1.2rem"></i>
+                                            style="color:navy;font-size:1.2rem"></i>
                                     </div>
                                     <div>
                                         <div class="stat-num"
-                                            style="color:#e67e22">
+                                            style="color:#e67e22 ">
                                             {{ dashStats.active_treks }}
                                         </div>
                                         <div class="stat-lbl">Upcoming Treks</div>
                                     </div>
                                 </div>
-                                <a class="small text-decoration-none"
-                                    style="color:#e67e22; cursor:pointer"
+                                <a class="small text-decoration-none fw-semibold"
+                                    style="color:#e67e22; cursor:pointer ;font-size:14px"
                                     @click="page='treks'; fetchTreks()">
                                     View schedule
                                     <i class="bi bi-chevron-right"></i>
@@ -158,20 +158,20 @@ const AdminPanel = {
                                     <div class="rounded-circle d-flex align-items-center
                                         justify-content-center"
                                         style="width:46px;height:46px;
-                                        background:#f9ebea">
+                                        background:navy">
                                         <i class="bi bi-journal-check"
                                             style="color:#FF6B5B;font-size:1.2rem"></i>
                                     </div>
                                     <div>
                                         <div class="stat-num"
-                                            style="color:#FF6B5B">
+                                            style="color:navy">
                                             {{ dashStats.total_bookings }}
                                         </div>
                                         <div class="stat-lbl">Total Bookings</div>
                                     </div>
                                 </div>
                                 <a class="small text-decoration-none"
-                                    style="color:#FF6B5B; cursor:pointer"
+                                    style="color:navy; cursor:pointer"
                                     @click="page='bookings'; fetchBookings()">
                                     View bookings
                                     <i class="bi bi-chevron-right"></i>
@@ -180,11 +180,61 @@ const AdminPanel = {
                         </div>
                     </div>
 
-                    <!-- RECENTLY ACTION -->
+
+<!-- SUMMARY CHARTS SECTION -->
+
+<div class="row g-3 mb-4">
+    <div class="col-md-8">
+        <div class="nova-card p-3">
+            <h6 class="fw-bold mb-3">
+                📈 Monthly Booking Trend
+            </h6>
+            <div class="chart-box">
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="nova-card p-3">
+            <h6 class="fw-bold mb-3">
+                🥧 Difficulty Split
+            </h6>
+            <div class="chart-box">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="nova-card p-3">
+            <h6 class="fw-bold mb-3 ">
+                📊 Bookings per Trek
+            </h6>
+            <div class="chart-box">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="nova-card p-3">
+            <h6 class="fw-bold mb-3">
+                🍩 Booking Status
+            </h6>
+            <div class="chart-box">
+                <canvas id="ringChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                    <!-- RECENTLY ACTION SECTION -->
 
                     <div class="nova-card p-3">
                         <h6 class="fw-bold mb-3">
-                            <i class="bi bi-activity me-2"
+                            <i class="bi bi-activity me-2 "
                                 style="color:#1B4F72"></i>
                             Recent Activities
                         </h6>
@@ -224,7 +274,7 @@ const AdminPanel = {
                     <div class="d-flex justify-content-between
                         align-items-center mb-4">
                         <h4 class="fw-bold mb-0">
-                            <i class="bi bi-map me-2"
+                            <i class="bi bi-map me-2 "
                                 style="color:#1B4F72"></i>Manage Treks
                         </h4>
                         <button class="btn btn-nova"
@@ -367,59 +417,97 @@ const AdminPanel = {
                             <div class="nova-card h-100"
                                 style="overflow:hidden">
 
-                                <!-- trek image -->
+<!-- trek image -->
 
-                                <div style="height:150px;
-                                    position:relative; overflow:hidden">
-                                    <img
-                                        :src="getTrekImage(t.region, t.title)"
-                                        :alt="t.title"
-                                        style="width:100%; height:100%;
-                                        object-fit:cover"/>
-                                    <span :class="getDiffTag(t.difficulty_level)"
-                                        style="position:absolute;
-                                        top:10px; right:10px">
-                                        {{ t.difficulty_level }}
-                                    </span>
-                                    <span class="badge"
-                                        :class="getStatusTag(t.current_status)"
-                                        style="position:absolute;
-                                        top:10px; left:10px">
-                                        {{ t.current_status }}
-                                    </span>
-                                </div>
+<div  style="height:300px;
+    position:relative; overflow:hidden">
+    <img
+        :src="getTrekImage(t.region, t.title,t.image_key)"
+        :alt="t.title"
+        style="width:100%; height:100%;
+        object-fit:cover; "/>
+    <span :class="getDiffTag(t.difficulty_level)"
+        style="position:absolute;
+        top:10px; right:10px">
+        {{ t.difficulty_level }}
+    </span>
+    <span class="badge"
+        :class="getStatusTag(t.current_status)"
+        style="position:absolute;
+        top:10px; left:10px">
+        {{ t.current_status }}
+    </span>
 
-                                <div class="p-3">
-                                    <h6 class="fw-bold mb-1">
-                                        {{ t.title }}
-                                    </h6>
-                                    <p class="text-muted small mb-2">
-                                        <i class="bi bi-geo-alt me-1"></i>
-                                        {{ t.region }}
-                                    </p>
-                                    <div class="d-flex gap-3 small
-                                        text-muted mb-3">
-                                        <span>
-                                            <i class="bi bi-calendar me-1"></i>
-                                            {{ t.trip_start }}
-                                        </span>
-                                        <span>
-                                            <i class="bi bi-clock me-1"></i>
-                                            {{ t.days_required }}d
-                                        </span>
-                                        <span class="fw-bold"
-                                            style="color:#1B4F72">
-                                            ₹{{ t.cost_per_person }}
-                                        </span>
+    <!--  title/region overlay on image -->
+    <div style="position:absolute;
+        bottom:0; left:0; right:0;
+        background:linear-gradient(
+            transparent, rgba(0,0,0,0.75));
+        padding:12px 14px">
+        <div class="text-white fw-semibold"
+            style="font-size:20px">
+            {{ t.title }}
+        </div>
+        <div class="text-white fw-semibold"
+            style="font-size:14px; opacity:0.95">
+            <i class="bi bi-geo-alt me-1"></i>
+            {{ t.region }}
+        </div>
+    </div>
+</div>
+
+<div class="p-3">
+    <div class="d-flex justify-content-between align-items-center w-80 fs-6
+        text-dark fw-semibold mb-3">
+        <span>
+            <i class="bi bi-calendar text-dark me-1 "></i>
+            {{ t.trip_start }}
+        </span>
+        <span>
+            <i class="bi bi-clock me-1 text-dark fw-bold "></i>
+            {{ t.days_required }}d
+        </span>
+        <div class="fw-semibold fs-5 bg-warning "
+            style="color:navy">
+            ₹{{ t.cost_per_person }}
+        </div>
+    </div>
+
+        <!-- overview toggle -->
+
+                                  <div class="mb-2" v-if="t.overview">
+
+                                    <!-- toggle button  -->
+                                    <span
+                                          @click="expanded[t.id] = !expanded[t.id]"
+                                          style="font-size:14px; color:#007FFF ;
+                                          cursor:pointer; font-weight:600;
+                                          display:inline-flex; align-items:center; gap:4px">
+                                        <i :class="expanded[t.id]
+                                          ? 'bi bi-chevron-up fw-bold'
+                                          : 'bi bi-chevron-down fw-bold'">
+                                        </i>
+                                        {{ expanded[t.id] ? 'Show Less' : 'Know More about this trek' }}
+                                    </span>
+
+                                    <!-- text only shows when expanded -->    
+                                    <div v-if="expanded[t.id]"
+                                        class="mt-2 p-2  text-dark fw-semibold "
+                                        style="background:#f4f7fa;
+                                        border-radius:18px;
+                                        border:2px solid #d0d7de;
+                                        font-size:15px;
+                                        line-height:1.6">
+                                        {{ t.overview }}
                                     </div>
-
+                                </div>
                                     <!-- SEAT CAPACITY -->
 
-                                    <div class="mb-3">
+                                    <div class="mb-3 ">
                                         <div class="d-flex
                                             justify-content-between
                                             small mb-1">
-                                            <span class="text-muted">
+                                            <span class="text-dark fw-semibold fs-6 ">
                                                 Seats
                                             </span>
                                             <span class="fw-bold">
@@ -438,35 +526,46 @@ const AdminPanel = {
                                     </div>
 
                                     <div v-if="t.guide_name"
-                                        class="small text-muted mb-3">
-                                        <i class="bi bi-person-badge me-1"></i>
+                                        class="small text-dark fs-6 mb-3 fw-semibold bg-primary-subtle" >
+                                        <i class="bi bi-person-badge me-1 "></i>
                                         Guide: {{ t.guide_name }}
                                     </div>
 
                                     <!-- buttons -->
 
-                                    <div class="d-flex gap-1">
-                                        <button
-                                            class="btn btn-sm
-                                            btn-outline-secondary flex-fill"
-                                            @click="startAssign(t)"
-                                            title="Assign Guide">
-                                            <i class="bi bi-person-check"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-sm
-                                            btn-outline-primary flex-fill"
-                                            @click="openEdit(t)"
-                                            title="Edit">
-                                            <i class="bi bi-pencil"></i>
-                                        </button>
-                                        <button
-                                            class="btn btn-sm
-                                            btn-outline-danger flex-fill"
-                                            @click="removeTrek(t.id)"
-                                            title="Delete">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
+                                    <div class="d-flex gap-2">
+                                         <button        
+                                            class="btn flex-fill "        
+                                            style="border:2px solid #5499C7; color:#5499C7;        
+                                            border-radius:14px; padding:4px; transition:all 0.2s"        
+                                            @click="startAssign(t)"        
+                                            title="Assign Guide"    
+                                            onmouseover="this.style.background='#5499C7'; this.style.color='#fff'"    
+                                            onmouseout="this.style.background='transparent'; this.style.color='#5499C7'">        
+                                            <i class="bi bi-person-check" style="font-size:1.3rem"></i>    
+                                         </button>
+                                        
+                                         <button                
+                                            class="btn flex-fill"        
+                                            style="border:2px solid #1B4F72; color:#1B4F72;        
+                                            border-radius:14px; padding:4px; transition:all 0.2s"        
+                                            @click="openEdit(t)"        
+                                            title="Edit"    
+                                            onmouseover="this.style.background='#1B4F72'; this.style.color='#fff'"
+                                            onmouseout="this.style.background='transparent'; this.style.color='#1B4F72'">        
+                                            <i class="bi bi-pencil" style="font-size:1.1rem"></i>    
+                                          </button>
+                                        
+                                          <button                
+                                              class="btn flex-fill"        
+                                              style="border:2px solid #de173b; color:#de173b;        
+                                              border-radius:14px; padding:4px; transition:all 0.2s"        
+                                              @click="removeTrek(t.id)"        
+                                              title="Delete"                                                                              
+                                              onmouseover="this.style.background='#de173b'; this.style.color='#fff'"   
+                                              onmouseout="this.style.background='transparent'; this.style.color='#de173b'">        
+                                              <i class="bi bi-trash" style="font-size:1.1rem"></i>    
+                                          </button>
                                     </div>
                                 </div>
                             </div>
@@ -488,42 +587,94 @@ const AdminPanel = {
                             <i class="bi bi-plus me-1"></i>Add Guide
                         </button>
                     </div>
+                    <!-- form for adding new guide -->
 
                     <div v-if="showGuideForm"
                         class="nova-card p-4 mb-4">
-                        <h6 class="fw-bold mb-3">New Guide</h6>
+                        <h6 class="fw-bold mb-3">New Trek Guide</h6>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Full Name</label>
                                 <input v-model="guideForm.full_name"
-                                    class="form-control"/>
+                                    class="form-control" required
+                                    placeholder="Guide full name"/>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Email</label>
                                 <input v-model="guideForm.email"
-                                    type="email" class="form-control"/>
+                                    type="email" class="form-control" required
+                                    placeholder="guide@email.com"/>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Password</label>
                                 <input v-model="guideForm.password"
-                                    type="password" class="form-control"/>
+                                type="password" class="form-control" required
+                                placeholder="Set password"/>
                             </div>
+                            <div class="col-md-6">
+                             <label class="form-label">Confirm Password</label>            
+                             <input v-model="guideForm.confirm_password"                
+                             type="password" class="form-control"    required             
+                             placeholder="Repeat password"/>  
+                            </div>
+
                             <div class="col-md-6">
                                 <label class="form-label">Contact No</label>
                                 <input v-model="guideForm.contact_no"
-                                    class="form-control"/>
+                                class="form-control"  placeholder="9876543210"/>
                             </div>
+
+                            <div class="col-md-6">            
+                                <label class="form-label">Experience</label>            
+                                <select v-model="guideForm.experience"                
+                                    class="form-select" required>                
+                                    <option value="">Select experience</option>
+                                    <option value="0-1 years">0-1 year</option>                
+                                    <option value="1-2 years">1-2 years</option>                
+                                    <option value="3-5 years">3-5 years</option>                
+                                    <option value="5+ years">5+ years</option>            
+                                </select>  
+                            </div>
+
+                            <div class="col-md-6">            
+                                <label class="form-label">Specialization</label>            
+                                <select v-model="guideForm.specialization"              
+                                    class="form-select" required >                
+                                    <option value="">Select specialization</option>                
+                                    <option value="High Altitude">High Altitude</option>            
+                                    <option value="Snow Trekking">Snow Trekking</option>              
+                                    <option value="Forest Trails">Forest Trails</option>        
+                                    <option value="River Rafting">River Rafting</option>          
+                                    <option value="General Trekking">General Trekking</option>        
+                                 </select>
+                            </div>
+
+                            <div class="col-md-6">            
+                                <label class="form-label">Status</label>            
+                                <select v-model="guideForm.is_active"                
+                                    class="form-select">                
+                                    <option :value="true">Active</option>                
+                                    <option :value="false">Inactive</option>            
+                                    </select>        
+                            </div> 
+
                             <div class="col-12">
                                 <button class="btn btn-nova"
                                     @click="addGuide" :disabled="busy">
                                     <span v-if="busy"
                                         class="spinner-border
                                         spinner-border-sm me-1"></span>
-                                    Add Guide
+                                    Create Guide
+                                </button>
+                                <button class="btn btn-outline-secondary"
+                                    @click="showGuideForm=false">
+                                    Cancel
                                 </button>
                             </div>
                         </div>
                     </div>
+
+                     <!-- GUIDE CARDS -->
 
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-4"
@@ -534,7 +685,7 @@ const AdminPanel = {
                                     <div class="rounded-circle d-flex
                                         align-items-center
                                         justify-content-center"
-                                        style="width:46px;height:46px;
+                                        style="width:47px;height:47px;
                                         background:#d6eaf8;
                                         color:#1B4F72;font-weight:700;
                                         font-size:17px">
@@ -544,34 +695,50 @@ const AdminPanel = {
                                         <div class="fw-bold">
                                             {{ g.full_name }}
                                         </div>
-                                        <div class="text-muted small">
+                                        <div class="fw-semibold text-muted small">
                                             {{ g.email }}
                                         </div>
-                                        <div class="text-muted small">
+                                        <div class="text-muted fw-semibold small">
                                             <i class="bi bi-phone me-1"></i>
-                                            {{ g.contact_no }}
+                                            {{ g.contact_no || 'N/A' }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mt-2 mb-2">
-                                    <span v-if="!g.is_active"
-                                        class="badge bg-warning text-dark">
-                                        Inactive
+                                <div class="d-flex gap-2 mb-3">
+                                    <span class="badge bg-light text-dark ">
+                                        <i class="bi bi-clock me-1"></i>
+                                        {{ g.experience || 'N/A' }}
                                     </span>
-                                    <span v-else
-                                        class="badge bg-success">Active</span>
+                                    <span class="badge bg-light text-dark">
+                                       <i class="bi bi-star me-1"></i>
+                                       {{ g.specialization || 'N/A' }}
+                                    </span>                                    
                                 </div>
-                                <button class="btn btn-sm
-                                    btn-outline-danger w-100"
-                                    @click="changeStatus(g.id,
-                                        {is_active:!g.is_active})">
-                                    {{ g.is_active
-                                        ? 'Deactivate' : 'Activate' }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                                <div class="mb-2">
+                    <span v-if="g.is_banned"
+                        class="badge bg-danger  ">Banned</span>
+                    <span v-else-if="!g.is_active"
+                        class="badge bg-warning text-dark">
+                        Inactive
+                    </span>
+                    <span v-else class="badge bg-success">Active</span>
                 </div>
+                <div class="d-flex gap-1 ">
+                    <button class="btn btn-sm btn-outline-dark btn-warning flex-fill fw-semibold"
+                        @click="changeStatus(g.id,
+                            {is_active:!g.is_active})">
+                        {{ g.is_active ? 'Deactivate' : 'Activate' }}
+                    </button>
+                    <button class="btn btn-sm btn-outline-dark btn-danger flex-fill fw-bold "
+                        @click="changeStatus(g.id,
+                            {is_banned:!g.is_banned})">
+                        {{ g.is_banned ? 'Unban' : 'Ban' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- ── TREKKERS PAGE ── -->
                 <div v-if="page==='trekkers'">
@@ -612,7 +779,7 @@ const AdminPanel = {
                                     <td>{{ u.contact_no }}</td>
                                     <td>
                                         <span class="badge
-                                            bg-light text-dark">
+                                            bg-info text- fs-7">
                                             {{ u.fitness_level || 'N/A' }}
                                         </span>
                                     </td>
@@ -634,8 +801,8 @@ const AdminPanel = {
                                     <td>
                                         <div class="d-flex gap-1">
                                             <button
-                                                class="btn btn-sm
-                                                btn-outline-warning"
+                                                class="btn btn-sm rounded
+                                                btn-outline-warning btn-dark fw-semibold"
                                                 @click="changeStatus(u.id,
                                                 {is_active:!u.is_active})">
                                                 {{ u.is_active
@@ -644,7 +811,7 @@ const AdminPanel = {
                                             </button>
                                             <button
                                                 class="btn btn-sm
-                                                btn-outline-danger"
+                                                btn-outline-danger btn-dark fw-bold"
                                                 @click="changeStatus(u.id,
                                                 {is_banned:!u.is_banned})">
                                                 {{ u.is_banned
@@ -671,26 +838,26 @@ const AdminPanel = {
                     <!-- status filter -->
         
                     <div class="d-flex gap-2">
-                    <button class="btn btn-sm"
+                    <button class="btn btn-sm fw-semibold "
                     
-                    :class="bookingFilter===''
+                    :class="bookingFilter==='' 
                     ? 'btn-nova' : 'btn-outline-secondary'"
                     @click="bookingFilter=''; fetchBookings()">
                     All
                     </button>
-                    <button class="btn btn-sm btn-outline-success"
+                    <button class="btn  btn-outline-info fs-6"
                     @click="bookingFilter='Booked';
                     fetchBookingsByStatus('Booked')">
                     Booked
                     </button>
     
-                    <button class="btn btn-sm btn-outline-danger"
+                    <button class="btn btn-sm btn-outline-danger fw-semibold"
                     @click="bookingFilter='Cancelled';
                     fetchBookingsByStatus('Cancelled')">
                     Cancelled
                     </button>
             
-                    <button class="btn btn-sm btn-outline-info"
+                    <button class="btn btn-sm btn-outline-success fw-semibold"
                     @click="bookingFilter='Completed';
                     fetchBookingsByStatus('Completed')">
                     Completed
@@ -729,17 +896,17 @@ const AdminPanel = {
                                     <td>{{ b.trek_region }}</td>
                                     <td>{{ b.booked_at }}</td>
                                     <td>
-                                        <span class="badge"
+                                        <span class="badge py-2 "
                                             :class="b.payment_status==='Paid'
-                                            ? 'bg-success'
-                                            : 'bg-warning text-dark'">
+                                            ? 'bg-success px-3' 
+                                            : 'bg-warning text-dark '">
                                             {{ b.payment_status || 'Pending' }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="badge"
+                                        <span class="badge py-2 "
                                             :class="b.booking_status==='Booked'
-                                            ? 'bg-success'
+                                            ? 'bg-success px-3'
                                             : b.booking_status==='Cancelled'
                                             ? 'bg-danger' : 'bg-secondary'">
                                             {{ b.booking_status }}
@@ -773,6 +940,7 @@ const AdminPanel = {
         const bookingList   = ref([])
         const searchInput   = ref('')
         const bookingFilter = ref('')
+        const expanded      = ref({})
 
         const showForm      = ref(false)
         const showGuideForm = ref(false)
@@ -789,7 +957,12 @@ const AdminPanel = {
         })
         const guideForm = ref({
             full_name:'', email:'',
-            password:'', contact_no:''
+            password:'', 
+            confirm_password   : '',
+            contact_no     : '',
+            experience     : '',
+            specialization : '',
+            is_active      : true
         })
 
         function showNotice(msg, err=false) {
@@ -813,57 +986,6 @@ const AdminPanel = {
             return m[s] || 'bg-secondary'
         }
 
-        function getTrekImage(region, title, imageKey='') {
-
-          const myImageMap = {
-
-        // specific trek names
-        'kedarnath' : 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&q=70',
-        'roopkund'  : 'https://images.unsplash.com/photo-1612438214708-f428a707dd4e?w=400&q=70',
-        'hampta'    : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70',
-        'triund'    : 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=400&q=70',
-        'valley'    : 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&q=70',
-
-        
-        'snow'      : 'https://images.unsplash.com/photo-1542332213-31f87348057f?w=400&q=70',
-        'forest'    : 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&q=70',
-        'river'     : 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70',
-        'lake'      : 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=400&q=70',
-        'glacier'   : 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&q=70',
-        'sunrise'   : 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70',
-        'desert'    : 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=70',
-        'temple'    : 'https://images.unsplash.com/photo-1548013146-72479768bada?w=400&q=70',
-
-        // regions
-        'manali'    : 'https://images.unsplash.com/photo-1626017740083-3c29e524e3f5?w=400&q=70',
-        'ladakh'    : 'https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?w=400&q=70',
-        'kashmir'   : 'https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=400&q=70',
-        'sikkim'    : 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&q=70',
-        'himachal'  : 'https://images.unsplash.com/photo-1597977084860-23cf629c5588?w=400&q=70',
-        'uttarakhand':'https://images.unsplash.com/photo-1623838978580-ef52ec53b4b1?w=400&q=70',
-    }
-
-    
-    if (imageKey && imageKey.trim() !== '') {
-        const k = imageKey.toLowerCase().trim()
-        if (myImageMap[k]) return myImageMap[k]
-    }
-
-    
-    const t = title.toLowerCase()
-    for (const key in myImageMap) {
-        if (t.includes(key)) return myImageMap[key]
-    }
-
-    
-    const r = region.toLowerCase()
-    for (const key in myImageMap) {
-        if (r.includes(key)) return myImageMap[key]
-    }
-
-    //  default
-    return 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&q=70'
-}
         
         function destroyMyChart(id) {
             try {
@@ -874,9 +996,12 @@ const AdminPanel = {
             } catch(e) {}
         }
 
-        async function goToDashboard() {
-            page.value = 'home'
-            await fetchDashboard()
+        async function goToDashboard() {    
+          page.value = 'home'    
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          await fetchDashboard()    
+          await new Promise(r => setTimeout(r, 600))    
+          await drawCharts()
         }
 
         async function fetchDashboard() {
@@ -895,14 +1020,183 @@ const AdminPanel = {
             }
         }
 
-        async function fetchBookingsByStatus(status) {
+        async function fetchBookingsByStatus(status) {    
+          try {        
+            const r = await axios.get(            
+              `/api/admin/bookings/history?status=${status}`        
+            )        
+            bookingList.value = r.data.bookings || []    
+          } catch(e) {        
+            showNotice('Could not load', true)    
+          }
+        }
+
+
+        async function drawCharts() {
     try {
-        const r = await axios.get(
-            `/api/admin/bookings/history?status=${status}`
-        )
-        bookingList.value = r.data.bookings || []
+        const r    = await axios.get('/api/admin/charts')
+        const data = r.data
+        if (!data) return
+
+        Object.keys(myCharts).forEach(id => {
+            if (myCharts[id]) {
+                myCharts[id].destroy()
+                delete myCharts[id]
+            }
+        })
+
+        const palette = {
+            blue  : '#1B4F72',
+            teal  : '#0ed2ab',
+            amber : '#f7d410',
+            coral : '#EC7063',
+            bgBlue: 'rgba(27,79,114,0.12)'
+        }
+
+        // line chart for monthly trend
+        const lineEl = document.getElementById('lineChart')
+        if (lineEl && data.monthly) {
+            myCharts['lineChart'] = new Chart(lineEl, {
+                type: 'line',
+                data: {
+                    labels: data.monthly.map(m => m.month),
+                    datasets: [{
+                        data: data.monthly.map(m => m.count),
+                        borderColor: palette.blue,
+                        backgroundColor: palette.bgBlue,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: palette.blue,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            align: 'top',
+                            color: palette.blue,
+                            font: { weight: 'bold', size: 11 }
+                        }
+                    },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            })
+        }
+
+        // pie chart for difficulty split
+        const pieEl = document.getElementById('pieChart')
+        if (pieEl && data.difficulty) {
+            const labs = data.difficulty.length > 0 ? data.difficulty.map(d => d.label) : ['No Data']
+            const vals = data.difficulty.length > 0 ? data.difficulty.map(d => d.count) : [1]
+
+            myCharts['pieChart'] = new Chart(pieEl, {
+                type: 'pie',
+                data: {
+                    labels: labs,
+                    datasets: [{
+                        data: vals,
+                        backgroundColor: [palette.teal, palette.coral, palette.amber],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+                        datalabels: {
+                            color: '#fff',
+                            font: { weight: 'bold', size: 12 },
+                            formatter: v => v
+                        }
+                    }
+                }
+            })
+        }
+
+        // bar chart for bookings per trek
+        const barEl = document.getElementById('barChart')
+        if (barEl && data.per_trek) {
+            const labs = data.per_trek.length > 0 ? data.per_trek.map(t => t.trek) : ['No Data']
+            const vals = data.per_trek.length > 0 ? data.per_trek.map(t => t.count) : [0]
+            
+            const diffColorMap = {
+              'Easy'  : '#1e8449',
+              'Moderate' : '#dbc230',
+              'Hard'  : '#de173b'
+            }
+
+            const barColors = data.per_trek.length>0
+                ? data.per_trek.map(t => diffColorMap[t.difficulty] || '#5499C7')
+                :  ['#5499C7']
+
+            myCharts['barChart'] = new Chart(barEl, {
+                type: 'bar',
+                data: {
+                    labels: labs,
+                    datasets: [{
+                        data: vals,
+                        backgroundColor: barColors,
+                        borderRadius: 6,
+                        maxBarThickness: 46
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'top',
+                            color: '#1a1a2e',
+                            font: { weight: 'bold', size: 11 }
+                        }
+                    },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            })
+        }
+
+        // doughnut chart for booking status
+        const ringEl = document.getElementById('ringChart')
+        if (ringEl && data.by_status) {
+            const labs = data.by_status.length > 0 ? data.by_status.map(s => s.label) : ['No Data']
+            const vals = data.by_status.length > 0 ? data.by_status.map(s => s.count) : [1]
+
+            myCharts['ringChart'] = new Chart(ringEl, {
+                type: 'doughnut',
+                data: {
+                    labels: labs,
+                    datasets: [{
+                        data: vals,
+                        backgroundColor: [palette.teal, palette.coral, palette.amber, palette.blue],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
+                        datalabels: {
+                            color: '#fff',
+                            font: { weight: 'bold', size: 12 },
+                            formatter: v => v
+                        }
+                    }
+                }
+            })
+        }
+
+        console.log('charts loaded successfully')
     } catch(e) {
-        showNotice('Could not load', true)
+        console.log('chart error:', e.message)
     }
 }
 
@@ -917,6 +1211,9 @@ const AdminPanel = {
         async function fetchGuides() {
             const r        = await axios.get('/api/admin/guides')
             guideList.value = r.data.guides
+            setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }, 50)
         }
 
         async function fetchTrekkers() {
@@ -955,6 +1252,10 @@ const AdminPanel = {
             editId.value    = t.id
             tripForm.value  = { ...t }
             showForm.value  = true
+
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+           }, 50)
         }
 
         function resetForm() {
@@ -973,22 +1274,65 @@ const AdminPanel = {
             await axios.delete(`/api/admin/treks/${id}`)
             showNotice('Trek removed')
             fetchTreks()
-        }
-
+        }        
+        
+        
         async function addGuide() {
-            busy.value = true
-            try {
-                await axios.post('/api/admin/guides', guideForm.value)
-                showNotice('Guide added!')
-                showGuideForm.value = false
-                guideForm.value = {
-                    full_name:'', email:'',
-                    password:'', contact_no:''
-                }
-                fetchGuides()
-            } catch(e) {
-                showNotice(e.response?.data?.msg || 'Failed', true)
-            } finally { busy.value = false }
+          if (!guideForm.value.full_name.trim()) {        
+            return showNotice('Full name is required', true)    
+          }    
+          if (!guideForm.value.email.trim()) {        
+            return showNotice('Email is required', true)    
+          }    
+          if (!guideForm.value.password) {        
+            return showNotice('Password is required', true)    
+          }             
+          if (!guideForm.value.confirm_password) {        
+            return showNotice('Please confirm your password', true)
+          }
+          if (guideForm.value.password !== guideForm.value.confirm_password) {        
+            return showNotice('Passwords do not match', true)
+  
+          }    
+          if (!guideForm.value.contact_no.trim()) {        
+            return showNotice('Contact number is required', true)    
+          }    
+          if (!guideForm.value.experience) {        
+            return showNotice('Please select experience level', true)        
+          }    
+          if (!guideForm.value.specialization) {        
+            return showNotice('Please select a specialization', true)    
+          }
+
+          busy.value = true    
+          try {        
+            await axios.post('/api/admin/guides', {            
+              full_name      : guideForm.value.full_name,            
+              email          : guideForm.value.email,            
+              password       : guideForm.value.password,            
+              contact_no     : guideForm.value.contact_no,            
+              experience     : guideForm.value.experience,            
+              specialization : guideForm.value.specialization        
+            })        
+            showNotice('Guide added successfully!')        
+            showGuideForm.value = false        
+        
+            guideForm.value = {          
+              full_name      : '',          
+              email          : '',          
+              password       : '',          
+              confirm_password   : '',          
+              contact_no     : '',          
+              experience     : '',          
+              specialization : ''  ,
+              is_active      : true      
+            }        
+            fetchGuides()      
+          } catch(e) {      
+            showNotice(e.response?.data?.msg || 'Failed to add guide', true)      
+          } finally {        
+            busy.value = false      
+          }    
         }
 
         function startAssign(trek) {
@@ -1023,8 +1367,10 @@ const AdminPanel = {
             } catch(e) { showNotice('Failed', true) }
         }
 
-        onMounted(async () => {
-            await fetchDashboard()
+        onMounted(async () => {    
+          await fetchDashboard()    
+          await new Promise(r => setTimeout(r, 600))    
+          await drawCharts()
         })
 
         return {
@@ -1033,13 +1379,14 @@ const AdminPanel = {
             trekList, guideList, trekkerList, bookingList,
             searchInput, showForm, showGuideForm, showAssign,
             editId, targetTrek, pickedGuide,
-            tripForm, guideForm,bookingFilter,
+            tripForm, guideForm,bookingFilter,expanded,
             fetchBookingsByStatus,
-            goToDashboard, fetchTreks, fetchGuides,
+            goToDashboard,drawCharts, fetchTreks, fetchGuides,
             fetchTrekkers, fetchBookings,
             submitTrek, openEdit, resetForm, removeTrek,
             addGuide, startAssign, doAssign, changeStatus,
             getDiffTag, getStatusTag, getTrekImage, showNotice
+            
         }
     }
 }

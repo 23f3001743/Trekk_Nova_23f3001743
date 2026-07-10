@@ -1,6 +1,4 @@
-# user.py
-# Central user model for admin, staff, and trekkers
-# Handles authentication, profile data, and role-based access
+# Central user model for admin, staff, and trekkers that Handles authentication, profile data, and role-based access
 # Linked to bookings and trek assignments through relationships
 
 from extensions import db
@@ -25,13 +23,13 @@ class User(db.Model):
 
     age = db.Column(db.Integer, nullable = True)
     fitness_level = db.Column(db.String(50), nullable=True)
+    experience     = db.Column(db.String(50), nullable=True)
+    specialization = db.Column(db.String(100), nullable=True)
     about_me = db.Column(db.Text, nullable= True)
 
 
     joined_on = db.Column(db.DateTime, default = datetime.utcnow)
 
-
-    #trekker can book more than one booking
 
     my_bookings = db.relationship(
         'Booking',
@@ -40,7 +38,6 @@ class User(db.Model):
         foreign_keys='Booking.trekker_id'
     )
 
-    # one guide(staff) -> many treks handled
     
     handled_treks = db.relationship(
         'Trek',
@@ -76,6 +73,8 @@ class User(db.Model):
             'is_banned'     : self.is_banned,
             'age'           : self.age,
             'fitness_level' : self.fitness_level,
+            'experience'     : self.experience,
+            'specialization' : self.specialization,
             'about_me'      : self.about_me,
             'joined_on'     : self.joined_on.strftime('%Y-%m-%d')
         }  

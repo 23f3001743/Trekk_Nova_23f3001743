@@ -1,5 +1,4 @@
-
-# this is the junction table linking app_users and treks
+#junction table linking app_users and treks
 
 from extensions import db
 from datetime import datetime

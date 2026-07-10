@@ -59,8 +59,9 @@ const LoginPage = {
                         <input v-model="loginData.password"
                             type="password" class="form-control"
                             placeholder="Enter password"/>
-                    </div>
+                    </div>                   
                 </div>
+
                 <button class="btn btn-nova w-100 py-2"
                     @click="doLogin" :disabled="busy">
                     <span v-if="busy"
@@ -94,6 +95,13 @@ const LoginPage = {
                             type="password" class="form-control"
                             placeholder="Min 6 chars"/>
                     </div>
+
+                    <div class="col-md-6">                                                            
+                    <label class="form-label">Confirm Password</label>    
+                    <input v-model="regData.confirm_password"        
+                    type="password" class="form-control"        
+                    placeholder="Repeat password"/>
+                 </div>
                     <div class="col-md-6">
                         <label class="form-label">Phone</label>
                         <input v-model="regData.contact_no"
@@ -147,6 +155,7 @@ const LoginPage = {
             full_name    : '',
             email        : '',
             password     : '',
+            confirm_password : '',
             contact_no   : '',
             age          : '',
             fitness_level: 'beginner'
@@ -180,6 +189,9 @@ const LoginPage = {
                 !regData.value.email ||
                 !regData.value.password) {
                 return showNotice('Name, email and password needed', true)
+            }
+            if (regData.value.password !== regData.value.confirm_password) {
+              return showNotice('Passwords do not match', true)    
             }
             busy.value = true
             try {

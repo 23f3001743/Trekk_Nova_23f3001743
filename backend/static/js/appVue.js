@@ -14,8 +14,6 @@ const TrekkNova = {
     template: `
 
     <div>
-      
-
         <div v-if="loggedIn"
             class="top-nav d-flex justify-content-between align-items-center">
             <span class="brand">

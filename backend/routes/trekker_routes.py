@@ -318,10 +318,13 @@ def pay_booking(bid):
 def export_csv():
     uid = get_jwt_identity()
     try:
+        # run directly without celery for now
         from jobs.bg_tasks import do_csv_export
-        do_csv_export.delay(int(uid))
-        return jsonify({'msg': 'Export started! Check email soon.'}), 200
-    except Exception:
-        from jobs.bg_tasks import do_csv_export
-        do_csv_export(int(uid))
-        return jsonify({'msg': 'CSV sent to your email!'}), 200
+        result = do_csv_export(int(uid))
+        if result:
+            return jsonify({'msg': 'CSV sent to your email!'}), 200
+        else:
+            return jsonify({'msg': 'Export failed, check email config'}), 500
+    except Exception as e:
+        print(f"Export error: {e}")
+        return jsonify({'msg': f'Error: {str(e)}'}), 500

@@ -1,6 +1,6 @@
 
 from flask import Blueprint, request, jsonify
-from extensions import db, get_from_cache, save_to_cache, clear_cache_pattern
+from extensions import db, get_from_cache, save_to_cache, clear_cache_pattern,mail
 from models.user    import User
 from models.trek    import Trek
 from models.booking import Booking
@@ -173,7 +173,6 @@ def delete_trek(tid):
 
     return jsonify({'msg': 'Trek removed'}), 200
 
-
 # ─────────────────────────────
 # ADD GUIDE (STAFF)
 # ─────────────────────────────
@@ -184,7 +183,7 @@ def add_guide():
     if not data:
         return jsonify({'msg': 'No data received'}), 400
 
-    for field in ['full_name', 'email', 'password', 'contact_no']:
+    for field in ['full_name', 'email', 'password', 'contact_no', 'experience', 'specialization']:
         if not str(data.get(field, '')).strip():
             return jsonify({'msg': f'{field} is required'}), 400
 
@@ -195,6 +194,8 @@ def add_guide():
         full_name  = data['full_name'].strip(),
         email      = data['email'].lower().strip(),
         contact_no = data['contact_no'],
+        experience     = data.get('experience', ''),
+        specialization = data.get('specialization', ''),
         role       = 'staff'
     )
     guide.set_password(data['password'])
@@ -202,11 +203,43 @@ def add_guide():
     db.session.add(guide)
     db.session.commit()
 
+    try:
+        from flask_mail import Message
+        msg = Message(
+            subject    = "Your TrekkNova Guide Account",
+            recipients = [guide.email]
+        )
+        msg.html = f"""
+        <div style="font-family:Arial; padding:20px;
+            max-width:600px; margin:auto">
+            <div style="background:#1B4F72; padding:20px;
+                color:white; text-align:center;
+                border-radius:8px 8px 0 0">
+                <h2>TrekkNova</h2>
+            </div>
+            <div style="padding:20px; background:#f4f7fa;
+                border-radius:0 0 8px 8px">
+                <p>Hi {guide.full_name}!</p>
+                <p>Your Trek Guide account has been created.</p>
+                <p><b>Email:</b> {guide.email}</p>
+                <p><b>Password:</b> {data['password']}</p>
+                <p>Login at: http://127.0.0.1:5000</p>
+                <br/>
+                <p style="color:#888; font-size:12px">
+                    Team TrekkNova
+                </p>
+            </div>
+        </div>
+        """
+        mail.send(msg)
+        print(f"welcome email sent to {guide.email}")
+    except Exception as e:
+        print(f"welcome email failed: {e}")
+
     return jsonify({
         'msg'  : 'Guide added successfully',
         'guide': guide.to_dict()
     }), 201
-
 
 @admin_bp.route('/guides', methods=['GET'])
 @only_admin
@@ -318,6 +351,7 @@ def get_chart_data():
     
     per_trek = db.session.query(
         Trek.title,
+        Trek.difficulty_level,
         func.count(Booking.id).label('total')
     ).join(Booking, Trek.id == Booking.trek_id, isouter=True)\
      .group_by(Trek.id)\
@@ -359,7 +393,7 @@ def get_chart_data():
         })
 
     return jsonify({
-        'per_trek'    : [{'trek': r.title,           'count': r.total} for r in per_trek],
+        'per_trek'    : [{'trek': r.title, 'difficulty': r.difficulty_level, 'count': r.total} for r in per_trek],
         'difficulty'  : [{'label': r.difficulty_level,'count': r.total} for r in by_diff],
         'by_status'   : [{'label': r.booking_status,  'count': r.total} for r in by_status],
         'monthly'     : monthly

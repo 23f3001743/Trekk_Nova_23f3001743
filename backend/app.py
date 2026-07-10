@@ -13,6 +13,10 @@ def create_app():
     mail.init_app(app)
     init_redis(app)
 
+    from celery_app import make_celery
+    global celery_instance
+    celery_instance = make_celery(app)
+
     from models.user import User
     from models.trek import Trek
     from models.booking import Booking
