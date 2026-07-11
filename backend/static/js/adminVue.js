@@ -373,7 +373,7 @@ const AdminPanel = {
                                         spinner-border-sm me-1"></span>
                                     {{ editId ? 'Update' : 'Create Trek' }}
                                 </button>
-                                <button class="btn btn-outline-danger fw-semibold"
+                                <button class="btn btn-outline-danger fw-semibold text-dark"
                                     @click="resetForm">Cancel</button>
                             </div>
                         </div>
@@ -403,7 +403,7 @@ const AdminPanel = {
                             <div class="col-md-4 d-flex gap-2">
                                 <button class="btn btn-nova"
                                     @click="doAssign">Assign</button>
-                                <button class="btn btn-outline-secondary"
+                                <button class="btn btn-danger fw-semibold "
                                     @click="showAssign=false">
                                     Cancel
                                 </button>
@@ -668,7 +668,7 @@ const AdminPanel = {
                                     </select>        
                             </div> 
 
-                            <div class="col-12">
+                            <div class="col-12 d-flex gap-2">
                                 <button class="btn btn-nova"
                                     @click="addGuide" :disabled="busy">
                                     <span v-if="busy"
@@ -676,7 +676,7 @@ const AdminPanel = {
                                         spinner-border-sm me-1"></span>
                                     Create Guide
                                 </button>
-                                <button class="btn btn-outline-secondary"
+                                <button class="btn btn-outline-danger fw-semibold text-dark "
                                     @click="showGuideForm=false">
                                     Cancel
                                 </button>
