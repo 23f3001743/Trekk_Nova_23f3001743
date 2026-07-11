@@ -286,72 +286,82 @@ const AdminPanel = {
                     <!-- TREK FORM -->
 
                     <div v-if="showForm" class="nova-card p-4 mb-4">
-                        <h6 class="fw-bold mb-3">
+                        <h6 class="fw-bold mb-3 fs-5 ">
                             {{ editId ? 'Edit Trek' : 'New Trek' }}
                         </h6>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Trek Title</label>
+                                <label class="form-label fw-semibold"style="color:black; font-size:16px">Trek Title</label>
                                 <input v-model="tripForm.title"
                                     class="form-control"
                                     placeholder="e.g. Kedarnath Trek"/>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Region</label>
+                                <label class="form-label fw-semibold"style="color:black; font-size:16px">Region</label>
                                 <input v-model="tripForm.region"
                                     class="form-control"
                                     placeholder="e.g. Uttarakhand"/>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Overview</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Overview</label>
                                 <textarea v-model="tripForm.overview"
                                     class="form-control" rows="2"
                                     placeholder="Brief description...">
                                 </textarea>
                             </div>
                             <div class="col-md-6">
-                            <label class="form-label">
+                            <label class="form-label fw-semibold " style="color:black; font-size:16px">
                             Image Theme
-                            <small class="text-muted">
+                            <small class="text">
                            
                             </small>
                             </label>
                             <input v-model="tripForm.image_key"
-                            class="form-control"
+                            class="form-control fw-semibold" style="color:black; font-size:16px"
                             placeholder="type a theme word for image"/>
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label">Difficulty</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Difficulty</label>
                                 <select v-model="tripForm.difficulty_level"
-                                    class="form-select">
-                                    <option>Easy</option>
-                                    <option>Moderate</option>
-                                    <option>Hard</option>
+                                    class="form-select fw-semibold" style="color:black; font-size:15px">
+                                        <option>Easy</option>
+                                        <option>Moderate</option>
+                                        <option>Hard</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Days Required</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Days Required</label>
                                 <input v-model="tripForm.days_required"
                                     type="number" class="form-control"/>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Total Capacity</label>
-                                <input v-model="tripForm.capacity"
-                                    type="number" class="form-control"/>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Trip Status</label>
+                                <select v-model="tripForm.current_status"
+                                    class="form-select">
+                                        <option value="Open">Open</option>
+                                        <option value="Closed">Closed</option>
+                                        <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                  <label class="form-label fw-semibold" style="color:black; font-size:16px">Total Capacity</label>
+                                  <input v-model="tripForm.capacity"
+                                  type="number" class="form-control"/>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Cost Per Person (₹)</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Cost Per Person (₹)</label>
                                 <input v-model="tripForm.cost_per_person"
                                     type="number" class="form-control"/>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Trip Start</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Trip Start</label>
                                 <input v-model="tripForm.trip_start"
                                     type="date" class="form-control"/>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Trip End</label>
+                                <label class="form-label fw-semibold" style="color:black; font-size:16px">Trip End</label>
                                 <input v-model="tripForm.trip_end"
                                     type="date" class="form-control"/>
                             </div>
@@ -363,7 +373,7 @@ const AdminPanel = {
                                         spinner-border-sm me-1"></span>
                                     {{ editId ? 'Update' : 'Create Trek' }}
                                 </button>
-                                <button class="btn btn-outline-secondary"
+                                <button class="btn btn-outline-danger fw-semibold"
                                     @click="resetForm">Cancel</button>
                             </div>
                         </div>
@@ -953,7 +963,7 @@ const AdminPanel = {
             title:'', region:'', overview:'',
             difficulty_level:'Moderate', days_required:'',
             capacity:'', cost_per_person:'',
-            trip_start:'', trip_end:'',image_key      : ''
+            trip_start:'', trip_end:'',image_key: '',current_status: 'Open'
         })
         const guideForm = ref({
             full_name:'', email:'',
@@ -1265,7 +1275,7 @@ const AdminPanel = {
                 title:'', region:'', overview:'',
                 difficulty_level:'Moderate', days_required:'',
                 capacity:'', cost_per_person:'',
-                trip_start:'', trip_end:''
+                trip_start:'', trip_end:'', current_status: 'Open'
             }
         }
 

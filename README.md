@@ -32,6 +32,6 @@ TrekkNova lets users browse and book trekking packages across different regions 
 - [done] Trek Guide Dashboard
 - [done ] Trekker Dashboard and Booking System
 - [done ] Booking History and Status Tracking
-- [ ] Celery Background Jobs
-- [ ] Redis Caching
+- [done ] Celery Background Jobs
+- [done ] Redis Caching
 
