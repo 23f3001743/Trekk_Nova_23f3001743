@@ -132,7 +132,9 @@ const StaffPanel = {
                                         :src="getTrekImage(t.region, t.title,t.image_key)"
                                         :alt="t.title"
                                         style="width:100%; height:100%;
-                                        object-fit:cover"/>
+                                        object-fit:cover; transition:transform 0.3s"
+                                        @mouseover="$event.target.style.transform='scale(1.05)'"
+                                        @mouseout="$event.target.style.transform='scale(1)'""/>
                                     <span class="badge"
                                         :class="getStatusColor(t.current_status)"
                                         style="position:absolute;
@@ -170,7 +172,7 @@ const StaffPanel = {
                                 </div>
 
                                 <button class="btn btn-nova btn-sm w-100"
-                                    @click="openTrek(t)">
+                                    @click="page='treks';openTrek(t)">
                                     <i class="bi bi-people me-1"></i>
                                     Manage Participants
                                 </button>
@@ -224,7 +226,7 @@ const StaffPanel = {
                                 <input v-model="newSeats"
                                     type="number"
                                     class="form-control form-control-sm"
-                                    style="width:130px"
+                                    style="width:100px"
                                     placeholder="Seats"/>
                             </div>
                             <button class="btn btn-nova btn-sm"
@@ -294,18 +296,37 @@ const StaffPanel = {
                                 No treks assigned to you yet
                             </p>
                         </div>
-                        <div class="col-md-6"
-                            v-for="t in myTreks" :key="t.id">
-                            <div class="nova-card p-3">
+                    <div class="col-md-6 col-lg-4"    
+                        v-for="t in myTreks" :key="t.id">
+                        <div class="nova-card p-3">
+                         
+                            <div style="height:300px; overflow:hidden;
+                                border-radius:10px; margin-bottom:10px;
+                                position:relative">            
+                                <img
+                                    :src="getTrekImage(t.region, t.title, t.image_key)"
+                                    :alt="t.title"
+                                    style="width:100%; height:100%;
+                                    object-fit:cover;transition:transform 0.3s"
+                                    @mouseover="$event.target.style.transform='scale(1.05)'"
+                                    @mouseout="$event.target.style.transform='scale(1)'"/>
+                                <span class="badge"
+                                    :class="getStatusColor(t.current_status)"
+                                    style="position:absolute;
+                                    top:8px; left:8px">
+                                    {{ t.current_status }}
+                                </span>
+                            </div>
 
-                                <div class="d-flex justify-content-between
-                                    mb-2">
-                                    <div class="fw-semibold fs-5 ">{{ t.title }}</div>
+                            <div class="d-flex justify-content-between
+                                mb-2">
+                                <div class="fw-semibold fs-5">{{ t.title }}</div>
                                     <span class="badge"
                                         :class="getStatusColor(t.current_status)">
                                         {{ t.current_status }}
                                     </span>
                                 </div>
+        
 
                                 <div class="text-muted fw-semibold small mb-3">
                                     <i class="bi bi-geo-alt me-1"></i>

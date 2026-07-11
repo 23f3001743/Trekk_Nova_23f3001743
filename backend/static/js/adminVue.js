@@ -435,13 +435,16 @@ const AdminPanel = {
 
 <!-- trek image -->
 
-<div  style="height:320px;
+<div  style="height:300px;
     position:relative; overflow:hidden">
     <img
         :src="getTrekImage(t.region, t.title,t.image_key)"
         :alt="t.title"
         style="width:100%; height:100%;
-        object-fit:cover; "/>
+        object-fit:cover; transition:transform 0.3s"
+        @mouseover="$event.target.style.transform='scale(1.05)'"
+        @mouseout="$event.target.style.transform='scale(1)'"/>
+        
     <span :class="getDiffTag(t.difficulty_level)"
         style="position:absolute;
         top:10px; right:10px">

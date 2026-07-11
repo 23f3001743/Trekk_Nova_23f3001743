@@ -53,7 +53,7 @@ const TrekkerPanel = {
 
                     <!-- hero banner -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:250px">
+                        style="position:relative; height:200px">
                         <img
                             src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1100&q=80"
                             alt="trekking"
@@ -78,7 +78,7 @@ const TrekkerPanel = {
                     </div>
 
                     <!-- statistic data  boxes -->
-                    <div class="row g-3 mb-4" v-if="summary">
+                    <div class="row g-3 mb-4 mt-4" v-if="summary">
                         <div class="col-6 col-md-3">
                             <div class="stat-box card p-3 text-center border border-3  rounded-4 h-100 "
                                 style="border-color: var(--bs-purple) !important;">
@@ -119,20 +119,22 @@ const TrekkerPanel = {
                     </div>
 
                     <!-- available treks data -->
-                    <h6 class="fw-bold mb-3">Available Treks</h6>
+                    <h6 class="fw-bold mb-3 mt-5">Available Treks</h6>
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-4"
                             v-for="t in (openTreks || []).slice(0,3)" :key="t.id">
                             <div class="nova-card h-100"
                                 style="overflow:hidden">
                                 
-                                <div style="height:230px; position:relative; overflow:hidden">
+                                <div style="height:250px; position:relative; overflow:hidden ;transition:0.2">
                                     <img
                                         :src="getTrekImage(t.region,
                                             t.title, t.image_key)"
                                         :alt="t.title"
                                         style="width:100%; height:100%;
-                                        object-fit:cover; transition:transform 0.3s "/>
+                                        object-fit:cover; transition:transform 0.3s"
+                                        @mouseover="$event.target.style.transform='scale(1.05)'"
+                                        @mouseout="$event.target.style.transform='scale(1)'"/>
                                     <span :class="getDiffTag(t.difficulty_level)"
                                         style="position:absolute;
                                         top:10px; right:10px;
@@ -164,27 +166,27 @@ const TrekkerPanel = {
                             </div>
                         </div>
                     </div>
-                </div>
+                             <!-- browse more CTA -->
 
-                <!-- browse more CTA -->
+                    <div class="nova-card mb-4 p-4 text-center mt-4"    
+                          v-if="(openTreks || []).length > 3"    
+                          style="background:linear-gradient(135deg, #1B4F72, #5499C7)">    
+                        <i class="bi bi-compass text-white mb-2"        
+                            style="font-size:2rem"></i>    
+                        <h6 class="text-white fw-bold mb-1">       
+                              {{ openTreks.length - 3 }} more adventures Trek waiting    
+                        </h6>    
+                        <p class="text-white  small mb-3">        
+                              Discover treks across every region with difficulty level    
+                        </p>    
+                        <button class="btn btn-coral text-dark px-4"        
+                            @click="page='browse'; loadTreks()">        
+                            <i class="bi bi-search me-2"></i>        
+                            Search for More Treks    
+                        </button>
+                    </div>
+              </div>
 
-                <div class="nova-card mb-4 p-4 text-center"    
-                v-if="(openTreks || []).length > 3"    
-                style="background:linear-gradient(135deg, #1B4F72, #5499C7)">    
-                <i class="bi bi-compass text-white mb-2"        
-                style="font-size:2rem"></i>    
-                <h6 class="text-white fw-bold mb-1">       
-                {{ openTreks.length - 3 }} more adventures Trek waiting    
-                </h6>    
-                <p class="text-white  small mb-3">        
-                Discover treks across every region with difficulty level    
-                </p>    
-                <button class="btn btn-coral text-dark px-4"        
-                @click="page='browse'; loadTreks()">        
-                <i class="bi bi-search me-2"></i>        
-                Search for More Treks    
-                </button>
-                </div>
 
                 <!-- search treks -->
                 <div v-if="page==='browse'">
