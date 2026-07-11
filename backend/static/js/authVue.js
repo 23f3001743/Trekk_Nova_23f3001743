@@ -7,17 +7,16 @@ const LoginPage = {
             <!-- SMALL MOUNTAINS IMAGES -->
 
             <div class="mountain-strip">
-                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200&q=70" alt="mountain"/>
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&q=70" alt="peak"/>
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&q=70" alt="trek"/>
-                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=200&q=70" alt="lake"/>
+                <img src="https://plus.unsplash.com/premium_photo-1764234874155-aa46aebd522d?w=700&q=80" alt="mountain"/>
+                
+                
             </div>
 
             
             <div class="text-center mb-4">
                 <i class="bi bi-binoculars" style="font-size:2.5rem; color:#1B4F72"></i>
-                <h4 class="fw-bold mt-1" style="color:#1B4F72">TrekkNova</h4>
-                <p class="text-muted small">Discover Your Next Peak</p>
+                <h4 class="fw-bold mt-1" style="color:#151C62">TrekkNova</h4>
+                <p class="text-dark ">Discover Your Next Peak</p>
             </div>
 
             
@@ -76,7 +75,7 @@ const LoginPage = {
 
             <!-- REGISTER FORM -->
             <div v-if="mode==='register'">
-                <div class="row g-3">
+                <div class="row g-2">
                     <div class="col-12">
                         <label class="form-label">Full Name</label>
                         <input v-model="regData.full_name"

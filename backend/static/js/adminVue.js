@@ -52,13 +52,13 @@ const AdminPanel = {
 
                     <!-- Welcome Greet -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:150px">
+                        style="position:relative; height:220px">
                         <img
-                            src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=70"
+                            src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=2000&q=80"
                             alt="mountains"
                             style="width:100%; height:100%; object-fit:cover"/>
                         <div style="position:absolute; inset:0;
-                            background:rgba(58, 119, 159, 0.75);
+                            background:linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.1) 60%);
                             display:flex; align-items:center; padding:24px">
                             <div>
                                 <h4 class="text-white fw-bold mb-1">
@@ -435,7 +435,7 @@ const AdminPanel = {
 
 <!-- trek image -->
 
-<div  style="height:300px;
+<div  style="height:320px;
     position:relative; overflow:hidden">
     <img
         :src="getTrekImage(t.region, t.title,t.image_key)"

@@ -41,7 +41,7 @@ const StaffPanel = {
                     <div class="nova-card mb-4 overflow-hidden"
                         style="position:relative; height:120px">
                         <img
-                            src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=1200&q=70"
+                            src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=1200&q=80"
                             alt="mountains"
                             style="width:100%; height:100%; object-fit:cover"/>
                         <div style="position:absolute; inset:0;

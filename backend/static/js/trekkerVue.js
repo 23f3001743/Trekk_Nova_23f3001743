@@ -53,9 +53,9 @@ const TrekkerPanel = {
 
                     <!-- hero banner -->
                     <div class="nova-card mb-4 overflow-hidden"
-                        style="position:relative; height:220px">
+                        style="position:relative; height:250px">
                         <img
-                            src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&q=80"
+                            src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=1100&q=80"
                             alt="trekking"
                             style="width:100%; height:100%; object-fit:cover"/>
                         <div style="position:absolute; inset:0;
