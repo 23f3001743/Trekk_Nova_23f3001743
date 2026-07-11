@@ -506,6 +506,7 @@ const TrekkerPanel = {
                                 <button
                                     v-if="b.booking_status==='Booked'"
                                     class="btn btn-sm btn-outline-danger w-90 fw-bold"
+                                    
                                     @click="doCancel(b.id)">
                                     Cancel Booking
                                 </button>

@@ -374,6 +374,9 @@ const AdminPanel = {
                                     {{ editId ? 'Update' : 'Create Trek' }}
                                 </button>
                                 <button class="btn btn-outline-danger fw-semibold text-dark"
+                                    style="transition:transform 0.2s"
+                                    onmouseover="this.style.transform='translateY(-1px)'"
+                                    onmouseout="this.style.transform='translateY(0)'"
                                     @click="resetForm">Cancel</button>
                             </div>
                         </div>
@@ -404,6 +407,9 @@ const AdminPanel = {
                                 <button class="btn btn-nova"
                                     @click="doAssign">Assign</button>
                                 <button class="btn btn-danger fw-semibold "
+                                    style="transition:transform 0.2s"
+                                    onmouseover="this.style.transform='translateY(-1px)'"
+                                    onmouseout="this.style.transform='translateY(0)'"
                                     @click="showAssign=false">
                                     Cancel
                                 </button>
@@ -677,6 +683,9 @@ const AdminPanel = {
                                     Create Guide
                                 </button>
                                 <button class="btn btn-outline-danger fw-semibold text-dark "
+                                    style="transition:transform 0.2s"
+                                    onmouseover="this.style.transform='translateY(-1px)'"
+                                    onmouseout="this.style.transform='translateY(0)'"
                                     @click="showGuideForm=false">
                                     Cancel
                                 </button>
