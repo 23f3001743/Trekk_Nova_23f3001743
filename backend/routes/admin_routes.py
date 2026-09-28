@@ -166,12 +166,23 @@ def delete_trek(tid):
     if not trek:
         return jsonify({'msg': 'Trek not found'}), 404
 
+    active = Booking.query.filter_by(
+        trek_id        = tid,
+        booking_status = 'Booked'
+    ).count()
+
+    if active > 0:
+        return jsonify({
+            'msg': f'Cannot delete — {active} active booking(s) exist'
+        }), 400
+
+    Booking.query.filter_by(trek_id=tid).delete()
     db.session.delete(trek)
     db.session.commit()
     clear_cache_pattern('treks:*')
     clear_cache_pattern('admin:dash:*')
 
-    return jsonify({'msg': 'Trek removed'}), 200
+    return jsonify({'msg': 'Trek deleted successfully'}), 200
 
 # ─────────────────────────────
 # ADD GUIDE (STAFF)

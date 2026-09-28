@@ -848,17 +848,22 @@ const TrekkerPanel = {
         }
 
         async function saveProfile() {
-            loading.value = true
-            try {
-                await axios.put('/api/auth/me', myProfile.value)
-                showNotice('Profile saved!')
-                myProfile.value.new_password = ''
-            } catch(e) {
-                showNotice(e.response?.data?.msg || 'Failed', true)
-            } finally {
-                loading.value = false
-            }
-        }
+    loading.value = true
+    try {
+        const r = await axios.put('/api/auth/me', myProfile.value)
+
+       
+        localStorage.setItem('user', JSON.stringify(r.data.user))
+
+        showNotice('Profile saved!')
+        myProfile.value.new_password = ''
+
+    } catch(e) {
+        showNotice(e.response?.data?.msg || 'Failed', true)
+    } finally {
+        loading.value = false
+    }
+}
 
         async function doExport() {
             try {
